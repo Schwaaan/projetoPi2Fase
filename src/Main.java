@@ -15,13 +15,13 @@ public class Main {
     AnswerService answerService = new AnswerService();
     AlternativeService alternativeService = new AlternativeService();
 
-    Question question = questionService.createQuestion(1,"1", "Quanto é 2 + 2", false);
+    Question question = questionService.createQuestion(1, "1", "Quanto é 2 + 2", false);
     Alternative alternative1 = alternativeService.createAlternative(1, question, "4", true, false);
     Alternative alternative2 = alternativeService.createAlternative(1, question, "3", false, false);
     Alternative alternative3 = alternativeService.createAlternative(1, question, "2", false, false);
     Alternative alternative4 = alternativeService.createAlternative(1, question, "5", false, false);
 
-    Question question1 = questionService.createQuestion(1,"1", "xxxx", false);
+    Question question1 = questionService.createQuestion(1, "1", "xxxx", false);
 
     System.out.println(question.toString());
 
@@ -29,8 +29,7 @@ public class Main {
 
     System.out.println(questionService.getQuestions().size());
 
-
-    questionService.deleteQuestionById(1);
+    questionService.deleteQuestionById(question1);
 
     System.out.println(questionService.getQuestions().size());
 

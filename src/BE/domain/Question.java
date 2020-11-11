@@ -1,5 +1,7 @@
 package BE.domain;
 
+import javax.annotation.processing.Generated;
+
 public class Question {
 
   private Integer id;
