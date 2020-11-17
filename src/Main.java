@@ -4,35 +4,34 @@ import BE.domain.Question;
 import BE.services.AlternativeService;
 import BE.services.AnswerService;
 import BE.services.QuestionService;
-import FE.FrontQuest;
+import FE.HomeFrame;
 import javax.swing.JFrame;
 
 public class Main {
 
   public static void main(String[] args) {
 
-    QuestionService questionService = new QuestionService();
+    QuestionService questionService2 = new QuestionService();
     AnswerService answerService = new AnswerService();
     AlternativeService alternativeService = new AlternativeService();
 
-    Question question = questionService.createQuestion(1,"1", "Quanto é 2 + 2", false);
+    Question question = questionService2.createQuestion(1, "1", "Quanto é 2 + 2", false);
     Alternative alternative1 = alternativeService.createAlternative(1, question, "4", true, false);
     Alternative alternative2 = alternativeService.createAlternative(1, question, "3", false, false);
     Alternative alternative3 = alternativeService.createAlternative(1, question, "2", false, false);
     Alternative alternative4 = alternativeService.createAlternative(1, question, "5", false, false);
 
-    Question question1 = questionService.createQuestion(1,"1", "xxxx", false);
+    Question question1 = questionService2.createQuestion(1, "1", "xxxx", false);
 
     System.out.println(question.toString());
 
-    System.out.println(questionService.getQuestions().get(0));
+    System.out.println(questionService2.getQuestions().get(0));
 
-    System.out.println(questionService.getQuestions().size());
+    System.out.println(questionService2.getQuestions().size());
 
+    questionService2.deleteQuestion(question);
 
-    questionService.deleteQuestion(question);
-
-    System.out.println(questionService.getQuestions().size());
+    System.out.println(questionService2.getQuestions().size());
 
     System.out.println(alternative1);
     System.out.println(alternative2);
@@ -54,7 +53,7 @@ public class Main {
 
 //   PARTE VICTOR FRONT END
     JFrame frame = null;
-    frame = new FrontQuest();
+    frame = new HomeFrame();
     frame.setVisible(true);
   }
 }
