@@ -80,7 +80,7 @@ public class QuestionPanel extends JPanel {
     btnChange.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent event) {
-
+        frame.showCreatQuest();
       }
     });
 

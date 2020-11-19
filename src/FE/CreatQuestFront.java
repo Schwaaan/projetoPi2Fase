@@ -1,7 +1,6 @@
 package FE;
 
 import BE.services.QuestionService;
-
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,22 +12,18 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import java.util.Objects;
-import javax.swing.*;
 
 public class CreatQuestFront extends JPanel {
 
   private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
   private static final int NUM_RADIOBTN = 5;
   private JButton button;
-
   private MainFrame frame;
-
-
   private JButton creatbtn;
   private JTextField textFieldQuestion;
   private JTextField textFieldA;
@@ -44,11 +39,11 @@ public class CreatQuestFront extends JPanel {
     JPanel contentPane = new JPanel();
     contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     contentPane.setBackground(Color.CYAN);
-  //  setContentPane(contentPane);
+    //  setContentPane(contentPane);
     setSize(1000, 650);
 
-  //  setResizable(false);
-   // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //  setResizable(false);
+    // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     layout = new GridBagLayout();
     setLayout(layout);
@@ -124,7 +119,6 @@ public class CreatQuestFront extends JPanel {
     /**
      * Componentes de Botão
      */
-
     label = new JLabel();
     addComponent(label, 11, 0, 1, 1);
     creatbtn = new JButton("Criar");
@@ -159,20 +153,23 @@ public class CreatQuestFront extends JPanel {
   }
 
   private class ActionEventHandler implements ActionListener {
+
     @Override
     public void actionPerformed(ActionEvent event) {
       if (event.getSource() == creatbtn) {
 
-        if (!textFieldQuestion.getText().isEmpty() & !textFieldA.getText().isEmpty() & !textFieldB.getText().isEmpty() & !textFieldC.getText().isEmpty() & !textFieldD.getText().isEmpty() & !textFieldE.getText().isEmpty()) {
+        if (!textFieldQuestion.getText().isEmpty() & !textFieldA.getText().isEmpty() & !textFieldB
+            .getText().isEmpty() & !textFieldC.getText().isEmpty() & !textFieldD.getText().isEmpty()
+            & !textFieldE.getText().isEmpty()) {
           //TODO FAZER A VALIDÇÃO DO RADIONBUTON
 
-          QuestionService.createQuestion("1",textFieldQuestion.getText());
+          QuestionService.createQuestion("1", textFieldQuestion.getText());
+
           JOptionPane.showMessageDialog(CreatQuestFront.this,
-                  "Questão criado com sucesso!","The Game", JOptionPane.INFORMATION_MESSAGE);
-          }
-        else {
+              "Questão criado com sucesso!", "The Game", JOptionPane.INFORMATION_MESSAGE);
+        } else {
           JOptionPane.showMessageDialog(CreatQuestFront.this,
-                  "Preencha todos os campos","Erro ao criar questão", JOptionPane.INFORMATION_MESSAGE);
+              "Preencha todos os campos", "Erro ao criar questão", JOptionPane.INFORMATION_MESSAGE);
         }
       }
     }
