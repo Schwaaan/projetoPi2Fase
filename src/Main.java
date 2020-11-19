@@ -55,7 +55,7 @@ public class Main {
 
 //   PARTE VICTOR FRONT END
     JFrame frame = null;
-    frame = new HomeFrame();
+ //   frame = new HomeFrame();
     frame.setVisible(true);
   }
 }

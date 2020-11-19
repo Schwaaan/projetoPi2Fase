@@ -68,7 +68,7 @@ public class QuestionPanel extends JPanel {
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                // TODO chamar o m√©todo que mostra a tela de formul√°rio de quest√£o
+                // TODO chamar o mÈtodo que mostra a tela de formul·rio de quest„o
             }
         });
 
@@ -78,11 +78,21 @@ public class QuestionPanel extends JPanel {
 
         btnChange.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
-                // TODO chamar o m√©todo que mostra a tela de formul√°rio de quest√£o
+            public void actionPerformed(ActionEvent event) {   
+            	//quando tu clica aqui, dispara um evento que pega a questao do table model,
+            			// pegando ela pela linha. OBJETO DO TIPO TAREFA
+                Task task = tableModel.getTask();	
+                //ELE RECEBE A TAREFA, PASSA PRO FRAME PRINCIPAL E O FRAME PRINCIPAl,PASSA PRO FORMULARIO
+                frame.showFormPanel(task);
             }
         });
-
+        //aqui eu atualizo minha tabela que ja veio com os valores
+        //mas agora ela volta com os valores que mando a ela
+        public void reload() {
+        	tableModel.load(QuestionService.list());
+        }
+             
+        
         panelBtn.add(btnChange);
         
         btnRemove = new JButton("Remover");
@@ -90,7 +100,7 @@ public class QuestionPanel extends JPanel {
         btnRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO aplicar os m√©todos de remo√ß√£o
+                // TODO aplicar os mÈtodos de remoÁ„o
             }
         });
 

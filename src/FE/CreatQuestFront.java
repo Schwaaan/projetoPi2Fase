@@ -1,4 +1,23 @@
 package FE;
+import services.*;
+
+import java.awt.GridBagLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -12,17 +31,24 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+
+import model.Task;
+import model.TaskDB;
+import view.FormPanel;
+import view.TodoFrame;
 
 public class CreatQuestFront extends JFrame {
 
   private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
   private static final int NUM_RADIOBTN = 5;
   private JButton button;
-
+  private JFrame frameFrontQst;
+  private JButton saveBtn;
 
   private GridBagLayout layout;
   private GridBagConstraints constraints;
@@ -132,7 +158,28 @@ public class CreatQuestFront extends JFrame {
     addComponent(panel, 10, 1, 3, 1);
 
   }
+  private void createSaveBtn() {
+      saveBtn = new JButton("Salvar");
+      saveBtn.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              Task task = new Task();
+              task.setTask(taskTxt.getText());
+              task.setDescription(descriptionTxt.getText());
 
+              if (FormPanel.this.task == null) {
+            	  
+            	  //aqui precisa passar 
+            	  QuestionService.insert(task);
+                  JOptionPane.showMessageDialog(FormPanel.this, "Tarefa criada com sucesso!", frameFrontQst.TITLE,
+                          JOptionPane.INFORMATION_MESSAGE);
+              } 
+
+              frameFrontQst.showMainPanel();
+          }
+      });
+  }
+  
   private void addComponent(JComponent comp, int row, int col, int width, int height) {
     constraints.gridx = col;
     constraints.gridy = row;
