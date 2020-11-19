@@ -4,13 +4,15 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BE.domain.Question;
+
 public class MainFrame extends JFrame {
 
     private CardLayout layout;
     private JPanel cardsPanel;
     private HomePanel homePanel;
     private QuestionPanel questionPanel;
-    private CreatQuestFront creatQuestPanel;
+    private CreatQuestPanel creatQuestPanel;
 
     public MainFrame() {
         this.layout = new CardLayout();
@@ -36,9 +38,8 @@ public class MainFrame extends JFrame {
         this.questionPanel = new QuestionPanel(this);
         this.cardsPanel.add(this.questionPanel, QuestionPanel.class.getName());// criar cards e adicionar dentro dos
                                                                                // panel
-
-        this.creatQuestPanel = new CreatQuestFront(this);
-        this.cardsPanel.add(this.creatQuestPanel, CreatQuestFront.class.getName());
+        this.creatQuestPanel = new CreatQuestPanel(this);
+        this.cardsPanel.add(this.creatQuestPanel, CreatQuestPanel.class.getName());
     }
 
     public void showHomePanel(JPanel jPanel) {
@@ -46,7 +47,13 @@ public class MainFrame extends JFrame {
         // tem que ter um para cada card
     }
 
-    public void showCreatQuest() {
-        this.layout.show(this.cardsPanel, CreatQuestFront.class.getName());
+    public void showCreatQuest(Question question) {
+        this.creatQuestPanel.setQuestion(question);
+        this.layout.show(this.cardsPanel, CreatQuestPanel.class.getName());
     }
+
+	public void showQuestionPanel() {
+        questionPanel.reload();
+        this.layout.show(this.cardsPanel, QuestionPanel.class.getName());
+	}
 }
