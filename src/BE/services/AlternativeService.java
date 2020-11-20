@@ -25,6 +25,7 @@ public class AlternativeService {
     if (index >= 0) {
       alternatives.set(index, alternative);
     }
+    System.out.println(alternative);
   }
 
   public static void deleteAlternative(Alternative alternative) {

@@ -59,7 +59,7 @@ public class Alternative {
 
   @Override
   public String toString() {
-    return String.format("Resposta à questão '%s': '%s'\n", getAlternativeQuestion().getQuestion(), getAlternative());
+    return String.format("%s", getAlternative());
   }
 
   @Override
