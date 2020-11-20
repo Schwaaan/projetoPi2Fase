@@ -220,7 +220,7 @@ public class CreatQuestPanel extends JPanel {
                 JOptionPane.INFORMATION_MESSAGE);
           } else {
             quest.setId(question.getId());
-            QuestionService.updateQuestion(question);
+            QuestionService.updateQuestion(quest);
             JOptionPane.showMessageDialog(CreatQuestPanel.this, "Questão Alterada com sucesso!", "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
           }
