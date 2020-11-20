@@ -224,11 +224,11 @@ public class CreatQuestPanel extends JPanel {
             JOptionPane.showMessageDialog(CreatQuestPanel.this, "Questão Alterada com sucesso!", "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
           }
+          frame.showQuestionPanel();
         } else {
           JOptionPane.showMessageDialog(CreatQuestPanel.this, "Preencha todos os campos", "Erro ao criar questão",
               JOptionPane.INFORMATION_MESSAGE);
         }
-        frame.showQuestionPanel();
       }
     }
   } // fim da classe ActionEventHandler
