@@ -5,16 +5,20 @@ public class Alternative {
   private int id;
   private Question question;
   private String alternative;
-  private boolean accepted; // proponho alterar para rigthAlternative (alternativa certa)
+  private boolean rigthAlternative;
   private boolean deleted;
 
-  public Alternative(int id, Question question, String alternative, boolean accepted,
-      boolean deleted) {
-    this.id = id;
+  public Alternative(Question question, String alternative, boolean rigthAlternative, boolean deleted) {
     this.question = question;
     setAlternative(alternative);
-    setAccepted(accepted);
+    setRigthAlternative(rigthAlternative);
     setDeleted(deleted);
+  }
+  
+  public void setId(int i) {
+    if (id > 0) {
+      this.id = i;
+    }
   }
 
   public int getId() {
@@ -33,12 +37,12 @@ public class Alternative {
     return this.alternative;
   }
 
-  public void setAccepted(boolean accepted) {
-    this.accepted = accepted;
+  public void setRigthAlternative(boolean accepted) {
+    this.rigthAlternative = accepted;
   }
 
   public boolean getAccepted() {
-    return this.accepted;
+    return this.rigthAlternative;
   }
 
   public void setDeleted(boolean deleted) {
@@ -55,9 +59,25 @@ public class Alternative {
 
   @Override
   public String toString() {
-    return String.format("Resposta à questão '%s': '%s'\n",
-        getAlternativeQuestion().getQuestion(),
-        getAlternative());
+    return String.format("Resposta à questão '%s': '%s'\n", getAlternativeQuestion().getQuestion(), getAlternative());
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj == null) {
+      return false;
+    }
+
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+
+    Alternative alt = (Alternative) obj;
+    return this.id == alt.id;
   }
 
 

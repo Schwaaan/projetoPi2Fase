@@ -218,6 +218,9 @@ public class CreatQuestPanel extends JPanel {
             QuestionService.createQuestion(quest);
             JOptionPane.showMessageDialog(CreatQuestPanel.this, "Questão criado com sucesso!", "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
+
+            // crair as alternativas
+            
           } else {
             quest.setId(question.getId());
             QuestionService.updateQuestion(quest);
