@@ -17,6 +17,7 @@ public class AlternativeService {
   public static void createAlternative(Alternative alternative) {
     alternative.setId(++index);
     alternatives.add(alternative);
+    System.out.println(alternative);
   }
 
   public static void updateAlternative(Alternative alternative) {

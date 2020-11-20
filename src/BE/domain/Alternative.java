@@ -8,11 +8,11 @@ public class Alternative {
   private boolean rigthAlternative;
   private boolean deleted;
 
-  public Alternative(Question question, String alternative, boolean rigthAlternative, boolean deleted) {
+  public Alternative(Question question, String alternative, boolean rigthAlternative) {
     this.question = question;
     setAlternative(alternative);
     setRigthAlternative(rigthAlternative);
-    setDeleted(deleted);
+    setDeleted(false);
   }
   
   public void setId(int i) {

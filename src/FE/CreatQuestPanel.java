@@ -1,6 +1,8 @@
 package FE;
 
+import BE.domain.Alternative;
 import BE.domain.Question;
+import BE.services.AlternativeService;
 import BE.services.QuestionService;
 
 import java.awt.Color;
@@ -16,6 +18,7 @@ import java.awt.event.ItemListener;
 import javax.swing.*;
 
 public class CreatQuestPanel extends JPanel {
+  private final int NUM_ALTERNATIVES = 5;
 
   private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
@@ -78,7 +81,7 @@ public class CreatQuestPanel extends JPanel {
      */
     label = new JLabel("NOVA QUESTÃO");
     addComponent(label, 0, 2, 1, 1);
-   
+
     label = new JLabel("Questão: ");
     label.setForeground(Color.BLACK);
     addComponent(label, 2, 1, 1, 1);
@@ -137,7 +140,6 @@ public class CreatQuestPanel extends JPanel {
     buttonGroup.add(checkBoxD);
     checkBoxD.setHorizontalAlignment(JCheckBox.CENTER);
     addComponent(checkBoxD, 11, 4, 1, 1);
-    
 
     /** Alternativa 5 */
     label = new JLabel("5) ");
@@ -150,7 +152,7 @@ public class CreatQuestPanel extends JPanel {
     checkBoxE.setHorizontalAlignment(JCheckBox.CENTER);
     addComponent(checkBoxE, 12, 4, 1, 1);
 
-    //Adicionando Eventos no CheckBoxes
+    // Adicionando Eventos no CheckBoxes
     addListenerInBtn(checkBoxA);
     addListenerInBtn(checkBoxB);
     addListenerInBtn(checkBoxC);
@@ -173,9 +175,7 @@ public class CreatQuestPanel extends JPanel {
     addComponent(deletebtn, 14, 3, 1, 1);
   }
 
-
-
-  private void addListenerInBtn(JCheckBox checkBox){
+  private void addListenerInBtn(JCheckBox checkBox) {
     checkBox.addItemListener(new ItemListener() {
       @Override
       public void itemStateChanged(ItemEvent e) {
@@ -205,6 +205,7 @@ public class CreatQuestPanel extends JPanel {
   }
 
   private class ActionEventHandler implements ActionListener {
+
     @Override
     public void actionPerformed(ActionEvent event) {
 
@@ -212,15 +213,28 @@ public class CreatQuestPanel extends JPanel {
 
         if (!questionTxt.getText().isEmpty() & !textFieldA.getText().isEmpty() & !textFieldB.getText().isEmpty()
             & !textFieldC.getText().isEmpty() & !textFieldD.getText().isEmpty() & !textFieldE.getText().isEmpty()) {
+
           Question quest = new Question("1", questionTxt.getText());
+          
+          Alternative altA = new Alternative(quest, textFieldA.getText(), false);
+          Alternative altB = new Alternative(quest, textFieldB.getText(), false);
+          Alternative altC = new Alternative(quest, textFieldC.getText(), false);
+          Alternative altD = new Alternative(quest, textFieldD.getText(), false);
+          Alternative altE = new Alternative(quest, textFieldE.getText(), false);
+
           if (question == null) {
             // TODO FAZER A VALIDÇÃO DO RADIONBUTON
             QuestionService.createQuestion(quest);
+
+            AlternativeService.createAlternative(altA);
+            AlternativeService.createAlternative(altB);
+            AlternativeService.createAlternative(altC);
+            AlternativeService.createAlternative(altD);
+            AlternativeService.createAlternative(altE);
+
             JOptionPane.showMessageDialog(CreatQuestPanel.this, "Questão criado com sucesso!", "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
 
-            // crair as alternativas
-            
           } else {
             quest.setId(question.getId());
             QuestionService.updateQuestion(quest);
