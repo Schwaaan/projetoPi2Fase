@@ -1,5 +1,5 @@
 package FE;
-import BE.domain.Question;
+import BE.domain.base.Question;
 
 import java.util.ArrayList;
 import java.util.List;

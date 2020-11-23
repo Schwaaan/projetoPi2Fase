@@ -1,6 +1,6 @@
 package BE.services;
 
-import BE.domain.Question;
+import BE.domain.base.Question;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +29,4 @@ public class QuestionService {
     questions.removeIf(x -> x.getId().equals(question.getId()));
     System.out.println("Questão removida , Id = " + question.getId());
   }
-
-  
 }

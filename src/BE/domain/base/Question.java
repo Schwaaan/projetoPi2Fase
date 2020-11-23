@@ -1,16 +1,22 @@
-package BE.domain;
+package BE.domain.base;
 
 public class Question {
 
   private Integer id;
-  private String idTeacher;
-  private String question;
-  private Boolean deleted;
 
-  public Question(String idTeacher, String question) {
-    this.idTeacher = idTeacher;
+  public Type getTypeQuestion() {
+    return typeQuestion;
+  }
+
+  public void setTypeQuestion(Type typeQuestion) {
+    this.typeQuestion = typeQuestion;
+  }
+
+  private Type typeQuestion;
+  private String question;
+
+  public Question( String question) {
     this.question = question;
-    this.deleted = false;
   }
 
   public String getQuestion() {
@@ -19,22 +25,6 @@ public class Question {
 
   public void setQuestion(String question) {
     this.question = question;
-  }
-
-  public Boolean getDeleted() {
-    return deleted;
-  }
-
-  public void setDeleted(Boolean deleted) {
-    this.deleted = deleted;
-  }
-
-  public String getIdTeacher() {
-    return idTeacher;
-  }
-
-  public void setIdTeacher(String idTeacher) {
-    this.idTeacher = idTeacher;
   }
 
   public Integer getId() {

@@ -1,20 +1,20 @@
 package BE.domain;
 
+import BE.domain.base.Question;
+
 public class Alternative {
 
   private int id;
   private Question question;
   private String alternative;
-  private boolean accepted; // proponho alterar para rigthAlternative (alternativa certa)
-  private boolean deleted;
+  private boolean rightAlternative; // proponho alterar para rigthAlternative (alternativa certa) proposta aceita by jair lindoso
 
-  public Alternative(int id, Question question, String alternative, boolean accepted,
+  public Alternative(int id, Question question, String alternative, boolean rightAlternative,
       boolean deleted) {
     this.id = id;
     this.question = question;
     setAlternative(alternative);
-    setAccepted(accepted);
-    setDeleted(deleted);
+    setRigthAlternative(rightAlternative);
   }
 
   public int getId() {
@@ -33,20 +33,12 @@ public class Alternative {
     return this.alternative;
   }
 
-  public void setAccepted(boolean accepted) {
-    this.accepted = accepted;
+  public void setRigthAlternative(boolean rigthAlternative) {
+    this.rightAlternative = rigthAlternative;
   }
 
-  public boolean getAccepted() {
-    return this.accepted;
-  }
-
-  public void setDeleted(boolean deleted) {
-    this.deleted = deleted;
-  }
-
-  public boolean getDeleted() {
-    return this.deleted;
+  public boolean getRigthAlternative() {
+    return this.rightAlternative;
   }
 
   public Question getAlternativeQuestion() {
@@ -59,6 +51,4 @@ public class Alternative {
         getAlternativeQuestion().getQuestion(),
         getAlternative());
   }
-
-
 }

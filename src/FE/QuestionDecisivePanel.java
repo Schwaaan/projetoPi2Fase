@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class HomePanel extends JPanel {
+public class QuestionDecisivePanel extends JPanel {
 
   private MainFrame mainFrame;
 
-  public HomePanel(MainFrame mainFrame) {
+  public QuestionDecisivePanel(MainFrame mainFrame) {
     this.mainFrame = mainFrame;
     setMinimumSize(new Dimension(1200, 800));
     init();
@@ -57,11 +57,11 @@ public class HomePanel extends JPanel {
     panelbt.setLayout(new GridLayout(4, 1, 5, 10));
     panelbt.setBackground(new Color(0, 238, 224));
 
-    btnCreaterQuestions = new JButton("Criar Questões");
-    btnCreaterQuestions.addActionListener(new ActionListener(){
+    btnCreaterQuestions = new JButton("Questão dixcursiva");
+    btnCreaterQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        mainFrame.showQuestionDecisivePanel();
+        mainFrame.showDiscursiveCreatQuest(null);
       }
     });
     btnCreaterQuestions.setFont(new Font("TimesRoman", 1, 24));
@@ -69,12 +69,12 @@ public class HomePanel extends JPanel {
     btnCreaterQuestions.setRolloverEnabled(false);
     panelbt.add(btnCreaterQuestions);
 
-    btnReadQuestions = new JButton("Ver Questões");
+    btnReadQuestions = new JButton("Questão objetiva");
     btnReadQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getActionCommand().equals("Ver Questões")) {
-          mainFrame.showQuestionPanel();
+        if (actionEvent.getActionCommand().equals("Questão objetiva")) {
+          mainFrame.showObjectiveCreatQuest(null);
         }
       }
     });

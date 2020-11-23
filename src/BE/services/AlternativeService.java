@@ -1,7 +1,7 @@
 package BE.services;
 
 import BE.domain.Alternative;
-import BE.domain.Question;
+import BE.domain.base.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,7 @@ public class AlternativeService {
 
   public void deleteAlternative(Alternative alternative) {
     alternatives.remove(alternative);
-    alternative.setDeleted(true);
     System.out.printf("Alternativa %s excluída. Situação campo deleted: %b", alternative,
-        alternative.getDeleted());
+        alternative.getId());
   }
 }
