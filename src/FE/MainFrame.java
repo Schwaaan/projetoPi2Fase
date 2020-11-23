@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BE.domain.Alternative;
 import BE.domain.Question;
 
 public class MainFrame extends JFrame {
@@ -21,7 +20,7 @@ public class MainFrame extends JFrame {
         this.cardsPanel.setLayout(layout);
         add(cardsPanel);
         this.createCards();
-
+        
         this.showHomePanel(this.homePanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -53,8 +52,8 @@ public class MainFrame extends JFrame {
         this.layout.show(this.cardsPanel, CreatQuestPanel.class.getName());
     }
 
-    public void showQuestionPanel() {
+	public void showQuestionPanel() {
         questionPanel.reload();
         this.layout.show(this.cardsPanel, QuestionPanel.class.getName());
-    }
+	}
 }
