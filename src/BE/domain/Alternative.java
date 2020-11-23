@@ -5,20 +5,16 @@ public class Alternative {
   private int id;
   private Question question;
   private String alternative;
-  private boolean rigthAlternative;
+  private boolean accepted; // proponho alterar para rigthAlternative (alternativa certa)
   private boolean deleted;
 
-  public Alternative(Question question, String alternative, boolean rigthAlternative) {
+  public Alternative(int id, Question question, String alternative, boolean accepted,
+      boolean deleted) {
+    this.id = id;
     this.question = question;
     setAlternative(alternative);
-    setRigthAlternative(rigthAlternative);
-    setDeleted(false);
-  }
-  
-  public void setId(int i) {
-    if (id > 0) {
-      this.id = i;
-    }
+    setAccepted(accepted);
+    setDeleted(deleted);
   }
 
   public int getId() {
@@ -37,12 +33,12 @@ public class Alternative {
     return this.alternative;
   }
 
-  public void setRigthAlternative(boolean accepted) {
-    this.rigthAlternative = accepted;
+  public void setAccepted(boolean accepted) {
+    this.accepted = accepted;
   }
 
   public boolean getAccepted() {
-    return this.rigthAlternative;
+    return this.accepted;
   }
 
   public void setDeleted(boolean deleted) {
@@ -59,25 +55,9 @@ public class Alternative {
 
   @Override
   public String toString() {
-    return String.format("%s", getAlternative());
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-
-    if (obj == null) {
-      return false;
-    }
-
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-
-    Alternative alt = (Alternative) obj;
-    return this.id == alt.id;
+    return String.format("Resposta à questão '%s': '%s'\n",
+        getAlternativeQuestion().getQuestion(),
+        getAlternative());
   }
 
 

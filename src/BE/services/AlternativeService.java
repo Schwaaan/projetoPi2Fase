@@ -1,35 +1,26 @@
 package BE.services;
 
 import BE.domain.Alternative;
+import BE.domain.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AlternativeService {
 
-  private static int index = 0;
-  private static List<Alternative> alternatives = new ArrayList<>();
+  List<Alternative> alternatives = new ArrayList<>();
 
-  public static List<Alternative> getAlternatives() {
-    return alternatives;
+  public Alternative createAlternative(int id, Question question, String alternative,
+      boolean accepted, boolean deleted) {
+    Alternative tempAlternative = new Alternative(id, question, alternative, accepted, deleted);
+    alternatives.add(tempAlternative);
+    return tempAlternative;
   }
 
-  public static void createAlternative(Alternative alternative) {
-    alternative.setId(++index);
-    alternatives.add(alternative);
-    System.out.println(alternative);
-  }
-
-  public static void updateAlternative(Alternative alternative) {
-    int index = alternatives.indexOf(alternative);
-    if (index >= 0) {
-      alternatives.set(index, alternative);
-    }
-    System.out.println(alternative);
-  }
-
-  public static void deleteAlternative(Alternative alternative) {
+  public void deleteAlternative(Alternative alternative) {
     alternatives.remove(alternative);
-    System.out.printf("Alternativa %s excluída. Situação campo deleted: %b", alternative, alternative.getDeleted());
+    alternative.setDeleted(true);
+    System.out.printf("Alternativa %s excluída. Situação campo deleted: %b", alternative,
+        alternative.getDeleted());
   }
 }
