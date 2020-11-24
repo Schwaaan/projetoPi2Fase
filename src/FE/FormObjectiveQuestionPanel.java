@@ -169,8 +169,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     saveBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (!getQuestionTxt().getText().isEmpty() && !textFieldA.getText().isEmpty() && !textFieldB.getText().isEmpty()
-            && !textFieldC.getText().isEmpty()) {
+        if (validator()) {
 
           List<Alternative> alternativeList = this.getListAlternative(
               new Alternative(textFieldA.getText(), checkBoxATrue.isSelected()),
@@ -210,5 +209,16 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
       }
     });
     setSaveBtn(saveBtn);
+  }
+
+  private boolean validator() {
+    return 
+        !getQuestionTxt().getText().isEmpty() && 
+        !textFieldA.getText().isEmpty() && 
+        !textFieldB.getText().isEmpty() && 
+        !textFieldC.getText().isEmpty() &&
+        (checkBoxATrue.isSelected() || checkBoxAFalse.isSelected()) &&
+        (checkBoxBTrue.isSelected() || checkBoxBFalse.isSelected()) &&
+        (checkBoxCTrue.isSelected() || checkBoxCFalse.isSelected());
   }
 }

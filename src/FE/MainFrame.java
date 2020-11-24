@@ -2,7 +2,6 @@ package FE;
 
 import BE.domain.base.Question;
 import java.awt.CardLayout;
-import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 

@@ -1,6 +1,5 @@
 package FE;
 
-import BE.domain.DiscursiveQuestion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
