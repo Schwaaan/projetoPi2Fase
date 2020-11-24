@@ -104,7 +104,6 @@ public class QuestionTablePanel extends JPanel {
 
         } else {
           frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_DISCURSIVE);
-
         }
       }
     });
