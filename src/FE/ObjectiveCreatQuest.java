@@ -3,7 +3,6 @@ package FE;
 import BE.domain.Alternative;
 import BE.domain.ObjectiveQuestion;
 import BE.domain.base.Question;
-import BE.services.AlternativeService;
 import BE.services.QuestionService;
 import java.awt.Color;
 import java.awt.Insets;
@@ -25,10 +24,7 @@ import javax.swing.JTextField;
 
 public class ObjectiveCreatQuest extends FormQuestionPanel {
 
-  private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
-
   private Question question;
-  private AlternativeService alternativeService = new AlternativeService();
   private JTextField textFieldA;
   private JTextField textFieldB;
   private JTextField textFieldC;
@@ -117,16 +113,7 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
     checkBoxBTrue = new JCheckBox();
     btnGroupAltB.add(checkBoxBTrue);
     addComponent(checkBoxBTrue, 9, 2);
-    checkBoxAFalse.addItemListener(new ItemListener() {
-      @Override
-      public void itemStateChanged(ItemEvent itemEvent) {
-        System.out.println(itemEvent.getStateChange());
-        if (itemEvent.getStateChange() == 1) {
-          checkBoxAFalse.setSelected(false);
-        }
-      }
-    });
-
+    
     checkBoxBFalse = new JCheckBox();
     btnGroupAltB.add(checkBoxBFalse);
     addComponent(checkBoxBFalse, 9, 3);
@@ -145,23 +132,10 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
     btnGroupAltC.add(checkBoxCFalse);
     addComponent(checkBoxCFalse, 10, 3);
 
-    /*
-     * addListenerInBtn(checkBoxA); addListenerInBtn(checkBoxB);
-     * addListenerInBtn(checkBoxC); addListenerInBtn(checkBoxD);
-     * addListenerInBtn(checkBoxE);
-     */
     label = new JLabel();
     addComponent(label, 14, 0, 1, 1);
 
   }
-
-  /*
-   * private void addListenerInBtn(JCheckBox checkBox) {
-   * checkBox.addItemListener(new ItemListener() {
-   *
-   * @Override public void itemStateChanged(ItemEvent e) { if (e.getStateChange()
-   * == ItemEvent.SELECTED) { System.out.println("Item selecionado"); } } }); };
-   */
 
   @Override
   public void setQuestion(Question question) {

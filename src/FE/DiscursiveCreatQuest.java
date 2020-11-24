@@ -31,10 +31,6 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
     });
   }
 
-  private void createAlternatives() {
-    JLabel label;
-  }
-
   public void setQuestion(Question question) {
     this.question = question;
   }

@@ -121,7 +121,7 @@ public class QuestionPanel extends JPanel {
         }
       }
     });
-
+    disableBtns();
     panelBtn.add(btnRemove);
 
     add(panelBtn, BorderLayout.NORTH);

@@ -3,7 +3,6 @@ package FE;
 import BE.domain.base.Question;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -57,9 +56,7 @@ public class FormQuestionPanel extends JPanel {
     addComponent(scrollPane, 2, 1, 1, 5);
   }
 
-  public void createTypeQuestionComponent() {
-
-  }
+  public void createTypeQuestionComponent() {}
 
   private void createButtons() {
     JPanel btnPanel = new JPanel();
