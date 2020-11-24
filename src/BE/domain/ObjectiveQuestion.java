@@ -3,11 +3,15 @@ package BE.domain;
 import BE.domain.base.Question;
 import BE.domain.base.Type;
 import BE.services.QuestionService;
+import java.util.List;
 
 public class ObjectiveQuestion extends Question {
 
-  public ObjectiveQuestion(String question) {
+  private List<Alternative> alternativeList;
+
+  public ObjectiveQuestion(String question, List<Alternative> listAlternatives) {
     super(question);
+    this.alternativeList = listAlternatives;
   }
 
   @Override
@@ -16,5 +20,13 @@ public class ObjectiveQuestion extends Question {
     QuestionService.createQuestion(this);
     System.out.println("Questão objetiva criada com sucesso!");
     return "Questão criada com sucesso";
+  }
+
+  public List<Alternative> getAlternativeList() {
+    return alternativeList;
+  }
+
+  public void setAlternativeList(List<Alternative> alternativeList) {
+    this.alternativeList = alternativeList;
   }
 }

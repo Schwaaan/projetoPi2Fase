@@ -18,6 +18,7 @@ import java.awt.GridBagConstraints;
 
 public class FormQuestionPanel extends JPanel {
 
+  private Question question;
   private JTextArea questionTxt;
   private JTextField idTxt;
   private JButton saveBtn;
@@ -35,6 +36,8 @@ public class FormQuestionPanel extends JPanel {
     createForm();
     createButtons();
   }
+
+  public void validateQuestion(){};
 
   private void createForm() {
     JLabel label;
@@ -54,28 +57,26 @@ public class FormQuestionPanel extends JPanel {
     addComponent(scrollPane, 2, 1, 1, 5);
   }
 
-  public void createTypeQuestionComponent(){
+  public void createTypeQuestionComponent() {
 
   }
 
   private void createButtons() {
-      JPanel btnPanel = new JPanel();
+    JPanel btnPanel = new JPanel();
 
-      createSaveButton();
+    createSaveButton();
 
-      System.out.println(saveBtn);
+    System.out.println(saveBtn);
 
-      btnPanel.add(saveBtn);
+    btnPanel.add(saveBtn);
 
-      createCancelButton();
-      btnPanel.add(cancelBtn);
+    createCancelButton();
+    btnPanel.add(cancelBtn);
 
-      addComponent(btnPanel, 11, 1);
+    addComponent(btnPanel, 11, 1);
   }
 
-  public void createSaveButton(){
-
-  }
+  public void createSaveButton() {}
 
   private void createCancelButton() {
     cancelBtn = new JButton("Cancelar");
@@ -117,6 +118,11 @@ public class FormQuestionPanel extends JPanel {
   }
 
   public void setQuestion(Question question) {
+    this.question = question;
+  }
+
+  public Question getQuestion() {
+    return question;
   }
 }
 

@@ -1,23 +1,34 @@
 package FE;
 
+import BE.domain.Alternative;
 import BE.domain.ObjectiveQuestion;
 import BE.domain.base.Question;
+import BE.services.AlternativeService;
 import BE.services.QuestionService;
-
 import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentAdapter;
-
-import javax.swing.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class ObjectiveCreatQuest extends FormQuestionPanel {
 
   private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
   private Question question;
+  private AlternativeService alternativeService = new AlternativeService();
   private JTextField textFieldA;
   private JTextField textFieldB;
   private JTextField textFieldC;
@@ -34,10 +45,36 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
 
   public ObjectiveCreatQuest(MainFrame frame) {
     super(frame);
-    this.question = null;
+  }
+
+  public ObjectiveCreatQuest(MainFrame frame,Question question) {
+    super(frame);
+    this.question = question;
+  }
+
+  @Override
+  public void validateQuestion() {
     addComponentListener(new ComponentAdapter() {
       @Override
       public void componentShown(ComponentEvent arg0) {
+        if (Objects.isNull(question)) {
+          getQuestionTxt().setText("");
+          textFieldA.setText("");
+          textFieldB.setText("");
+          textFieldC.setText("");
+          checkBoxAFalse.setSelected(false);
+          checkBoxATrue.setSelected(false);
+          checkBoxBFalse.setSelected(false);
+          checkBoxBTrue.setSelected(false);
+          checkBoxCFalse.setSelected(false);
+          checkBoxCTrue.setSelected(false);
+        } else {
+          ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
+          getQuestionTxt().setText(objectiveQuestion.getQuestion());
+          textFieldA.setText(objectiveQuestion.getAlternativeList().get(0).getAlternative());
+          textFieldB.setText(objectiveQuestion.getAlternativeList().get(1).getAlternative());
+          textFieldC.setText(objectiveQuestion.getAlternativeList().get(2).getAlternative());
+        }
       }
     });
   }
@@ -80,6 +117,15 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
     checkBoxBTrue = new JCheckBox();
     btnGroupAltB.add(checkBoxBTrue);
     addComponent(checkBoxBTrue, 9, 2);
+    checkBoxAFalse.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent itemEvent) {
+        System.out.println(itemEvent.getStateChange());
+        if (itemEvent.getStateChange() == 1) {
+          checkBoxAFalse.setSelected(false);
+        }
+      }
+    });
 
     checkBoxBFalse = new JCheckBox();
     btnGroupAltB.add(checkBoxBFalse);
@@ -116,8 +162,15 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
    * @Override public void itemStateChanged(ItemEvent e) { if (e.getStateChange()
    * == ItemEvent.SELECTED) { System.out.println("Item selecionado"); } } }); };
    */
+
+  @Override
   public void setQuestion(Question question) {
     this.question = question;
+  }
+
+  @Override
+  public Question getQuestion() {
+    return question;
   }
 
   @Override
@@ -141,8 +194,16 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
             !textFieldA.getText().isEmpty() &&
             !textFieldB.getText().isEmpty()
             && !textFieldC.getText().isEmpty()) {
-          Question quest = new ObjectiveQuestion(getQuestionTxt().getText());
-          if (question == null) {
+
+          List<Alternative> alternativeList = this
+              .getListAlternative(new Alternative(textFieldA.getText(), checkBoxATrue.isSelected()),
+                  new Alternative(textFieldB.getText(), checkBoxBTrue.isSelected()),
+                  new Alternative(textFieldC.getText(), checkBoxCTrue.isSelected()));
+
+          Question quest = new ObjectiveQuestion(getQuestionTxt().getText(),
+              alternativeList);
+
+          if (Objects.isNull(getQuestion())) {
             quest.createQuestion();
             JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão criado com sucesso!",
                 "The Game",
@@ -161,6 +222,15 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
               "Erro ao criar questão",
               JOptionPane.INFORMATION_MESSAGE);
         }
+      }
+
+      private List<Alternative> getListAlternative(Alternative alternative,
+          Alternative alternative1, Alternative alternative2) {
+        List<Alternative> alternatives = new ArrayList<>();
+        alternatives.add(alternative);
+        alternatives.add(alternative1);
+        alternatives.add(alternative2);
+        return alternatives;
       }
     });
     setSaveBtn(saveBtn);

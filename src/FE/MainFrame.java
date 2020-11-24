@@ -2,6 +2,7 @@ package FE;
 
 import BE.domain.base.Question;
 import java.awt.CardLayout;
+import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -60,6 +61,7 @@ public class MainFrame extends JFrame {
   public void showForm(Question question, FormQuestionPanel formQuestionPanel) {
     this.formQuestionPanel = formQuestionPanel;
     formQuestionPanel.setQuestion(question);
+    formQuestionPanel.validateQuestion();
     this.layout.show(this.cardsPanel, formQuestionPanel.getClass().getName());
   }
 

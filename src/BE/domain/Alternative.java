@@ -1,28 +1,13 @@
 package BE.domain;
 
-import BE.domain.base.Question;
-
 public class Alternative {
 
-  private int id;
-  private Question question;
   private String alternative;
   private boolean rightAlternative; // proponho alterar para rigthAlternative (alternativa certa) proposta aceita by jair lindoso
 
-  public Alternative(int id, Question question, String alternative, boolean rightAlternative,
-      boolean deleted) {
-    this.id = id;
-    this.question = question;
-    setAlternative(alternative);
-    setRigthAlternative(rightAlternative);
-  }
-
-  public int getId() {
-    return this.id;
-  }
-
-  public int getAlternativeQuestionId() {
-    return this.question.getId();
+  public Alternative(String text, boolean isTrue) {
+    this.alternative = text;
+    this.rightAlternative = isTrue;
   }
 
   public void setAlternative(String alternative) {
@@ -41,14 +26,10 @@ public class Alternative {
     return this.rightAlternative;
   }
 
-  public Question getAlternativeQuestion() {
-    return this.question;
-  }
-
   @Override
   public String toString() {
     return String.format("Resposta à questão '%s': '%s'\n",
-        getAlternativeQuestion().getQuestion(),
+        //   getAlternativeQuestion().getQuestion(),
         getAlternative());
   }
 }
