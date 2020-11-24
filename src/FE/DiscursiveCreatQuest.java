@@ -1,5 +1,6 @@
 package FE;
 
+import BE.domain.DiscursiveQuestion;
 import BE.domain.base.Question;
 import BE.services.QuestionService;
 import java.awt.Insets;
@@ -18,11 +19,9 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
 
   private Question question;
   private JTextField typeQuestionTxt;
-
   private JButton saveBtn;
 
   public DiscursiveCreatQuest(MainFrame frame) {
-
     super(frame);
     this.question = null;
     addComponentListener(new ComponentAdapter() {
@@ -57,16 +56,16 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         if (!getQuestionTxt().getText().isEmpty()) {
-          Question quest = new Question(getQuestionTxt().getText());
+          Question quest = new DiscursiveQuestion(getQuestionTxt().getText());
           if (question == null) {
-            QuestionService.createQuestion(quest);
+            quest.createQuestion();
             JOptionPane.showMessageDialog(DiscursiveCreatQuest.this, "Questão criado com sucesso!",
                 "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
             quest.setId(question.getId());
-            QuestionService.updateQuestion(question);
+            QuestionService.updateQuestion(quest);
             JOptionPane
                 .showMessageDialog(DiscursiveCreatQuest.this, "Questão Alterada com sucesso!",
                     "The Game",
@@ -81,6 +80,7 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
         }
       }
     });
+
     setSaveBtn(saveBtn);
   }
 }

@@ -1,5 +1,6 @@
 package FE;
 
+import BE.domain.base.Question;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -15,102 +16,108 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 
-public abstract class FormQuestionPanel extends JPanel {
+public class FormQuestionPanel extends JPanel {
 
-    private JTextArea questionTxt;
-    private JTextField idTxt;
-    private JButton saveBtn;
-    private JButton cancelBtn;
-    private MainFrame frame;
-    private GridBagLayout layout;
-    private GridBagConstraints constraints;
-    private static Insets FIELD_INSETS = new Insets(5,5,5,5);
+  private JTextArea questionTxt;
+  private JTextField idTxt;
+  private JButton saveBtn;
+  private JButton cancelBtn;
+  private MainFrame frame;
+  private GridBagLayout layout;
+  private GridBagConstraints constraints;
+  private static Insets FIELD_INSETS = new Insets(5, 5, 5, 5);
 
-    public FormQuestionPanel(MainFrame frame) {
-        this.frame = frame;
+  public FormQuestionPanel(MainFrame frame) {
+    this.frame = frame;
+    layout = new GridBagLayout();
+    constraints = new GridBagConstraints();
+    setLayout(layout);
+    createForm();
+    createButtons();
+  }
 
-        layout = new GridBagLayout();
-        constraints = new GridBagConstraints();
-        setLayout(layout);
+  private void createForm() {
+    JLabel label;
+    label = new JLabel("Id");
+    addComponent(label, 0, 0);
+    idTxt = new JTextField(30);
 
-        createForm();
-        createButtons();
-    }
+    idTxt.setEditable(false);
+    addComponent(idTxt, 0, 1);
 
-    private void createForm() {
+    createTypeQuestionComponent();
 
-        JLabel label;
+    label = new JLabel("Questão");
+    addComponent(label, 2, 0);
+    questionTxt = new JTextArea(5, 30);
+    JScrollPane scrollPane = new JScrollPane(questionTxt);
+    addComponent(scrollPane, 2, 1, 1, 5);
+  }
 
-        label = new JLabel("Id");
-        addComponent(label, 0, 0);
-        idTxt = new JTextField(30);
+  public void createTypeQuestionComponent(){
 
-        idTxt.setEditable(false);
-        addComponent(idTxt, 0, 1);
+  }
 
-        createTypeQuestionComponent();
+  private void createButtons() {
+      JPanel btnPanel = new JPanel();
 
-        label = new JLabel("Questão");
-        addComponent(label, 2, 0);
-        questionTxt = new JTextArea(5,30);
-        JScrollPane scrollPane = new JScrollPane(questionTxt);
-        addComponent(scrollPane, 2, 1, 1, 5);
-    }
+      createSaveButton();
 
-    public abstract void createTypeQuestionComponent();
+      System.out.println(saveBtn);
 
-    private void createButtons() {
-        JPanel btnPanel = new JPanel();
+      btnPanel.add(saveBtn);
 
-        createSaveButton();
-        System.out.println(saveBtn);
-        btnPanel.add(saveBtn);
+      createCancelButton();
+      btnPanel.add(cancelBtn);
 
-        createCancelButton();
-        btnPanel.add(cancelBtn);
+      addComponent(btnPanel, 11, 1);
+  }
 
-        addComponent(btnPanel, 11, 1);
-    }
+  public void createSaveButton(){
 
-    public abstract void createSaveButton();
-    
-    private void createCancelButton() {
-        cancelBtn = new JButton("Cancelar");
-        cancelBtn.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                frame.showQuestionPanel();                
-            }
-        });
-    }
+  }
 
-    public void addComponent(JComponent comp, int row, int col) {
-        addComponent(comp, row, col,1, 1);
-    }
-
-    public void addComponent(JComponent comp, int row, int col, int width, int height) {
-        constraints.gridx = col;
-        constraints.gridy = row;
-        constraints.gridwidth = width;
-        constraints.gridheight = height;
-    
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = FIELD_INSETS;
-    
-        layout.setConstraints(comp, constraints);
-        add(comp);
+  private void createCancelButton() {
+    cancelBtn = new JButton("Cancelar");
+    cancelBtn.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        frame.showQuestionPanel();
       }
+    });
+  }
 
-      public void setSaveBtn(JButton button){
-        saveBtn = button;
-      }
+  public void addComponent(JComponent comp, int row, int col) {
+    addComponent(comp, row, col, 1, 1);
+  }
 
-      public MainFrame getFrame(){
-          return frame;
-      }
-      public JTextArea getQuestionTxt() {
-          return questionTxt;
-      }
+  public void addComponent(JComponent comp, int row, int col, int width, int height) {
+    constraints.gridx = col;
+    constraints.gridy = row;
+    constraints.gridwidth = width;
+    constraints.gridheight = height;
+
+    constraints.fill = GridBagConstraints.HORIZONTAL;
+    constraints.insets = FIELD_INSETS;
+
+    layout.setConstraints(comp, constraints);
+    add(comp);
+  }
+
+  public void setSaveBtn(JButton button) {
+    saveBtn = button;
+  }
+
+  public MainFrame getFrame() {
+    return frame;
+  }
+
+  public JTextArea getQuestionTxt() {
+    return questionTxt;
+  }
+
+  public void setQuestion(Question question) {
+  }
 }
 
 

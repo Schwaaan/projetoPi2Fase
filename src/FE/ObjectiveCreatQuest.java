@@ -1,5 +1,6 @@
 package FE;
 
+import BE.domain.ObjectiveQuestion;
 import BE.domain.base.Question;
 import BE.services.QuestionService;
 
@@ -17,7 +18,6 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
   private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
   private Question question;
-  private JTextArea questionTxt;
   private JTextField textFieldA;
   private JTextField textFieldB;
   private JTextField textFieldC;
@@ -33,20 +33,11 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
   private JButton saveBtn;
 
   public ObjectiveCreatQuest(MainFrame frame) {
-
     super(frame);
     this.question = null;
     addComponentListener(new ComponentAdapter() {
       @Override
       public void componentShown(ComponentEvent arg0) {
-        if (question == null) {
-          questionTxt.setText("");
-          textFieldA.setText("");
-          textFieldB.setText("");
-          textFieldC.setText("");
-        } else {
-          questionTxt.setText(question.getQuestion());
-        }
       }
     });
   }
@@ -121,7 +112,7 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
   /*
    * private void addListenerInBtn(JCheckBox checkBox) {
    * checkBox.addItemListener(new ItemListener() {
-   * 
+   *
    * @Override public void itemStateChanged(ItemEvent e) { if (e.getStateChange()
    * == ItemEvent.SELECTED) { System.out.println("Item selecionado"); } } }); };
    */
@@ -137,35 +128,37 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
     typeQuestionTxt = new JTextField(1);
     typeQuestionTxt.setEditable(false);
     addComponent(typeQuestionTxt, 1, 1);
-
     createAlternatives();
   }
 
   @Override
   public void createSaveButton() {
-    saveBtn = new JButton("Salvar");
+    this.saveBtn = new JButton("Salvar");
     saveBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (!getQuestionTxt().getText().isEmpty() & !textFieldA.getText().isEmpty() & !textFieldB.getText().isEmpty()
-            & !textFieldC.getText().isEmpty()) {
-          Question quest = new Question(getQuestionTxt().getText());
+        if (!getQuestionTxt().getText().isEmpty() &&
+            !textFieldA.getText().isEmpty() &&
+            !textFieldB.getText().isEmpty()
+            && !textFieldC.getText().isEmpty()) {
+          Question quest = new ObjectiveQuestion(getQuestionTxt().getText());
           if (question == null) {
-            // TODO FAZER A VALIDÇÃO DO RADIONBUTON
-            QuestionService.createQuestion(quest);
-            JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão criado com sucesso!", "The Game",
+            quest.createQuestion();
+            JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão criado com sucesso!",
+                "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
             quest.setId(question.getId());
-            QuestionService.updateQuestion(question);
-            JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão Alterada com sucesso!", "The Game",
+            QuestionService.updateQuestion(quest);
+            JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão Alterada com sucesso!",
+                "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
-
           }
         } else {
-          JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Preencha todos os campos", "Erro ao criar questão",
+          JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Preencha todos os campos",
+              "Erro ao criar questão",
               JOptionPane.INFORMATION_MESSAGE);
         }
       }

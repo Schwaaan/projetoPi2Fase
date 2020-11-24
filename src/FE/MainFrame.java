@@ -11,8 +11,8 @@ public class MainFrame extends JFrame {
   private JPanel cardsPanel;
   private HomePanel homePanel;
   private QuestionPanel questionPanel;
-  private ObjectiveCreatQuest objectiveCreatQuest;
-  private DiscursiveCreatQuest discursiveCreatQuest;
+  private FormQuestionPanel formQuestionPanel;
+  private FormQuestionPanel formQuestionPanel2;
   private QuestionDecisivePanel questionDecisivePanel;
 
   public MainFrame() {
@@ -39,15 +39,15 @@ public class MainFrame extends JFrame {
     this.questionPanel = new QuestionPanel(this);
     this.cardsPanel.add(this.questionPanel,
         QuestionPanel.class.getName());// criar cards e adicionar dentro dos
-    // panel
-    this.objectiveCreatQuest = new ObjectiveCreatQuest(this);
-    this.cardsPanel.add(this.objectiveCreatQuest, ObjectiveCreatQuest.class.getName());
 
     this.questionDecisivePanel = new QuestionDecisivePanel(this);
     this.cardsPanel.add(this.questionDecisivePanel, QuestionDecisivePanel.class.getName());
 
-    this.discursiveCreatQuest = new DiscursiveCreatQuest(this);
-    this.cardsPanel.add(this.discursiveCreatQuest, DiscursiveCreatQuest.class.getName());
+    this.formQuestionPanel = new ObjectiveCreatQuest(this);
+    this.cardsPanel.add(this.formQuestionPanel, ObjectiveCreatQuest.class.getName());
+
+    this.formQuestionPanel2 = new DiscursiveCreatQuest(this);
+    this.cardsPanel.add(this.formQuestionPanel2, DiscursiveCreatQuest.class.getName());
 
   }
 
@@ -57,14 +57,10 @@ public class MainFrame extends JFrame {
     // tem que ter um para cada card
   }
 
-  public void showObjectiveCreatQuest(Question question) {
-    this.objectiveCreatQuest.setQuestion(question);
-    this.layout.show(this.cardsPanel, ObjectiveCreatQuest.class.getName());
-  }
-
-  public void showDiscursiveCreatQuest(Question question) {
-    this.discursiveCreatQuest.setQuestion(question);
-    this.layout.show(this.cardsPanel, DiscursiveCreatQuest.class.getName());
+  public void showForm(Question question, FormQuestionPanel formQuestionPanel) {
+    this.formQuestionPanel = formQuestionPanel;
+    formQuestionPanel.setQuestion(question);
+    this.layout.show(this.cardsPanel, formQuestionPanel.getClass().getName());
   }
 
   public void showQuestionPanel() {

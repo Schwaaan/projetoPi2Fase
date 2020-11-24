@@ -1,5 +1,6 @@
 package FE;
 
+import BE.domain.DiscursiveQuestion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -57,11 +58,12 @@ public class QuestionDecisivePanel extends JPanel {
     panelbt.setLayout(new GridLayout(4, 1, 5, 10));
     panelbt.setBackground(new Color(0, 238, 224));
 
-    btnCreaterQuestions = new JButton("Questão dixcursiva");
+    btnCreaterQuestions = new JButton("Questão discursiva");
     btnCreaterQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        mainFrame.showDiscursiveCreatQuest(null);
+        FormQuestionPanel form = new DiscursiveCreatQuest(mainFrame);
+        mainFrame.showForm(null, form);
       }
     });
     btnCreaterQuestions.setFont(new Font("TimesRoman", 1, 24));
@@ -74,7 +76,8 @@ public class QuestionDecisivePanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getActionCommand().equals("Questão objetiva")) {
-          mainFrame.showObjectiveCreatQuest(null);
+          FormQuestionPanel form = new ObjectiveCreatQuest(mainFrame);
+          mainFrame.showForm(null, form);
         }
       }
     });

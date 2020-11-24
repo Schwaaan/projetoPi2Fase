@@ -1,21 +1,12 @@
 package BE.domain.base;
 
-public class Question {
+public abstract class Question {
 
   private Integer id;
-
-  public Type getTypeQuestion() {
-    return typeQuestion;
-  }
-
-  public void setTypeQuestion(Type typeQuestion) {
-    this.typeQuestion = typeQuestion;
-  }
-
   private Type typeQuestion;
   private String question;
 
-  public Question( String question) {
+  public Question(String question) {
     this.question = question;
   }
 
@@ -35,6 +26,14 @@ public class Question {
     this.id = id;
   }
 
+  public Type getTypeQuestion() {
+    return typeQuestion;
+  }
+
+  public void setTypeQuestion(Type typeQuestion) {
+    this.typeQuestion = typeQuestion;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -51,6 +50,8 @@ public class Question {
 
     Question question = (Question) obj;
     return this.id == question.id;
-
   }
+
+  public abstract String createQuestion();
 }
+

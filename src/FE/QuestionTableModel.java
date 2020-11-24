@@ -1,6 +1,8 @@
 package FE;
+
 import BE.domain.base.Question;
 
+import BE.domain.base.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,70 +11,77 @@ import javax.swing.table.AbstractTableModel;
 public class QuestionTableModel extends AbstractTableModel {
 
 
-    private List<Question> questions = new ArrayList<>();
-    private String[] columns = new String[] {"Id", "Questão"};
+  private List<Question> questions = new ArrayList<>();
+  private String[] columns = new String[]{"Id", "Questão", "Tipo"};
 
-    public QuestionTableModel(List<Question> list) {
-        this.questions = list;
+  public QuestionTableModel(List<Question> list) {
+    this.questions = list;
+  }
+
+  @Override
+  public String getColumnName(int column) {
+    String columnName = null;
+
+    if (column >= 0 && column <= columns.length) {
+      columnName = columns[column];
     }
 
-    @Override
-    public String getColumnName(int column) {
-        String columnName = null;
+    return columnName;
+  }
 
-        if (column >= 0 && column <= columns.length) {
-            columnName = columns[column];
-        }
+  @Override
+  public int getRowCount() {
+    return questions.size();
+  }
 
-        return columnName;
+  @Override
+  public int getColumnCount() {
+    return columns.length;
+  }
+
+
+  // implementado apenzas porque é obrigatório, mas não iremos usar por enquanto
+  @Override
+  public Object getValueAt(int rowIndex, int colIndex) {
+    String value = null;
+
+    if (rowIndex >= 0 && rowIndex <= questions.size()) {
+      Question question = questions.get(rowIndex);
+
+      switch (colIndex) {
+        case 0:
+          value = Integer.toString(question.getId());
+          break;
+        case 1:
+          value = question.getQuestion();
+          break;
+        case 2:
+          if (question.getTypeQuestion().equals(Type.DISCURSIVE)) {
+            value = "Discursiva";
+            break;
+          } else {
+            value = "Objetiva";
+            break;
+          }
+        default:
+          System.err.printf("[ERRO] Índice de coluna inválido: %d\n", colIndex);
+          break;
+      }
     }
+    return value;
+  }
 
-    @Override
-    public int getRowCount() {
-        return questions.size();
-    }
+  public void load(List<Question> questions) {
+    this.questions = questions;
+    fireTableDataChanged();
+  }
 
-    @Override
-    public int getColumnCount() {
-        return columns.length;
-    }
+  public Question getQuestion(int rowIndex) {
+    return questions.get(rowIndex);
+  }
 
-
-    // implementado apenzas porque é obrigatório, mas não iremos usar por enquanto
-    @Override
-    public Object getValueAt(int rowIndex, int colIndex) {
-        String value = null;
-
-        if (rowIndex >= 0 && rowIndex <= questions.size()) {
-            Question question = questions.get(rowIndex);
-
-            switch (colIndex) {
-                case 0:
-                    value = Integer.toString(question.getId());
-                    break;
-                case 1:
-                    value = question.getQuestion();
-                    break;
-                
-                default:
-                    System.err.printf("[ERRO] Índice de coluna inválido: %d\n", colIndex);
-                    break;
-            }
-        }
-        return value;
-    }
-
-    public void load(List<Question> questions) {
-        this.questions = questions;
-        fireTableDataChanged();
-    }
-    
-    public Question getQuestion(int rowIndex){
-        return questions.get(rowIndex);
-    }
-
-	public void delete(Question quest) {
-        questions.remove(quest);
-        fireTableDataChanged();
-	}
+  public void delete(Question quest) {
+    questions.remove(quest);
+    fireTableDataChanged();
+  }
 }
