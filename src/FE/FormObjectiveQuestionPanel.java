@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class ObjectiveCreatQuest extends FormQuestionPanel {
+public class FormObjectiveQuestionPanel extends FormQuestionPanel {
 
   private Question question;
   private JTextField textFieldA;
@@ -39,11 +39,11 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
 
   private JButton saveBtn;
 
-  public ObjectiveCreatQuest(MainFrame frame) {
+  public FormObjectiveQuestionPanel(MainFrame frame) {
     super(frame);
   }
 
-  public ObjectiveCreatQuest(MainFrame frame,Question question) {
+  public FormObjectiveQuestionPanel(MainFrame frame,Question question) {
     super(frame);
     this.question = question;
   }
@@ -179,20 +179,20 @@ public class ObjectiveCreatQuest extends FormQuestionPanel {
 
           if (Objects.isNull(getQuestion())) {
             quest.createQuestion();
-            JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão criado com sucesso!",
+            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!",
                 "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
             quest.setId(question.getId());
             QuestionService.updateQuestion(quest);
-            JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Questão Alterada com sucesso!",
+            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!",
                 "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           }
         } else {
-          JOptionPane.showMessageDialog(ObjectiveCreatQuest.this, "Preencha todos os campos",
+          JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Preencha todos os campos",
               "Erro ao criar questão",
               JOptionPane.INFORMATION_MESSAGE);
         }

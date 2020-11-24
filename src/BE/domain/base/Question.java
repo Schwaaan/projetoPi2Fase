@@ -3,7 +3,7 @@ package BE.domain.base;
 public abstract class Question {
 
   private Integer id;
-  private Type typeQuestion;
+  private TypeQuestion typeQuestion;
   private String question;
 
   public Question(String question) {
@@ -26,11 +26,11 @@ public abstract class Question {
     this.id = id;
   }
 
-  public Type getTypeQuestion() {
+  public TypeQuestion getTypeQuestion() {
     return typeQuestion;
   }
 
-  public void setTypeQuestion(Type typeQuestion) {
+  public void setTypeQuestion(TypeQuestion typeQuestion) {
     this.typeQuestion = typeQuestion;
   }
 

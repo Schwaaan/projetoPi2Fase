@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class DiscursiveCreatQuest extends FormQuestionPanel {
+public class FormDicursiveQuestionPanel extends FormQuestionPanel {
 
   private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
@@ -21,7 +21,7 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
   private JTextField typeQuestionTxt;
   private JButton saveBtn;
 
-  public DiscursiveCreatQuest(MainFrame frame) {
+  public FormDicursiveQuestionPanel(MainFrame frame) {
     super(frame);
     this.question = null;
     addComponentListener(new ComponentAdapter() {
@@ -55,7 +55,7 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
           Question quest = new DiscursiveQuestion(getQuestionTxt().getText());
           if (question == null) {
             quest.createQuestion();
-            JOptionPane.showMessageDialog(DiscursiveCreatQuest.this, "Questão criado com sucesso!",
+            JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Questão criado com sucesso!",
                 "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
@@ -63,14 +63,14 @@ public class DiscursiveCreatQuest extends FormQuestionPanel {
             quest.setId(question.getId());
             QuestionService.updateQuestion(quest);
             JOptionPane
-                .showMessageDialog(DiscursiveCreatQuest.this, "Questão Alterada com sucesso!",
+                .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão Alterada com sucesso!",
                     "The Game",
                     JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
 
           }
         } else {
-          JOptionPane.showMessageDialog(DiscursiveCreatQuest.this, "Preencha todos os campos",
+          JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Preencha todos os campos",
               "Erro ao criar questão",
               JOptionPane.INFORMATION_MESSAGE);
         }

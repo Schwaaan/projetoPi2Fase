@@ -11,10 +11,10 @@ public class MainFrame extends JFrame {
   private CardLayout layout;
   private JPanel cardsPanel;
   private HomePanel homePanel;
-  private QuestionPanel questionPanel;
+  private QuestionTablePanel questionPanel;
   private FormQuestionPanel formQuestionPanel;
   private FormQuestionPanel formQuestionPanel2;
-  private QuestionDecisivePanel questionDecisivePanel;
+  private DecideTypeQuestionPanel questionDecisivePanel;
 
   public MainFrame() {
     this.layout = new CardLayout();
@@ -37,18 +37,18 @@ public class MainFrame extends JFrame {
     this.homePanel = new HomePanel(this);
     this.cardsPanel.add(this.homePanel, HomePanel.class.getName());
 
-    this.questionPanel = new QuestionPanel(this);
+    this.questionPanel = new QuestionTablePanel(this);
     this.cardsPanel.add(this.questionPanel,
-        QuestionPanel.class.getName());// criar cards e adicionar dentro dos
+        QuestionTablePanel.class.getName());// criar cards e adicionar dentro dos
 
-    this.questionDecisivePanel = new QuestionDecisivePanel(this);
-    this.cardsPanel.add(this.questionDecisivePanel, QuestionDecisivePanel.class.getName());
+    this.questionDecisivePanel = new DecideTypeQuestionPanel(this);
+    this.cardsPanel.add(this.questionDecisivePanel, DecideTypeQuestionPanel.class.getName());
 
-    this.formQuestionPanel = new ObjectiveCreatQuest(this);
-    this.cardsPanel.add(this.formQuestionPanel, ObjectiveCreatQuest.class.getName());
+    this.formQuestionPanel = new FormObjectiveQuestionPanel(this);
+    this.cardsPanel.add(this.formQuestionPanel, FormObjectiveQuestionPanel.class.getName());
 
-    this.formQuestionPanel2 = new DiscursiveCreatQuest(this);
-    this.cardsPanel.add(this.formQuestionPanel2, DiscursiveCreatQuest.class.getName());
+    this.formQuestionPanel2 = new FormDicursiveQuestionPanel(this);
+    this.cardsPanel.add(this.formQuestionPanel2, FormDicursiveQuestionPanel.class.getName());
 
   }
 
@@ -67,10 +67,10 @@ public class MainFrame extends JFrame {
 
   public void showQuestionPanel() {
     questionPanel.reload();
-    this.layout.show(this.cardsPanel, QuestionPanel.class.getName());
+    this.layout.show(this.cardsPanel, QuestionTablePanel.class.getName());
   }
 
   public void showQuestionDecisivePanel() {
-    this.layout.show(this.cardsPanel, QuestionDecisivePanel.class.getName());
+    this.layout.show(this.cardsPanel, DecideTypeQuestionPanel.class.getName());
   }
 }

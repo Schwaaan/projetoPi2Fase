@@ -2,7 +2,7 @@ package FE;
 
 import BE.domain.base.Question;
 
-import BE.domain.base.Type;
+import BE.domain.base.TypeQuestion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class QuestionTableModel extends AbstractTableModel {
           value = question.getQuestion();
           break;
         case 2:
-          if (question.getTypeQuestion().equals(Type.DISCURSIVE)) {
+          if (question.getTypeQuestion().equals(TypeQuestion.DISCURSIVE)) {
             value = "Discursiva";
             break;
           } else {

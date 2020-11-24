@@ -1,5 +1,5 @@
 package BE.domain.base;
 
-public enum Type {
+public enum TypeQuestion {
   DISCURSIVE, OBJECTIVE
 }

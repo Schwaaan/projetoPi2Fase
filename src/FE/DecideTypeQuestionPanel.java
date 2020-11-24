@@ -12,11 +12,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class QuestionDecisivePanel extends JPanel {
+public class DecideTypeQuestionPanel extends JPanel {
 
   private MainFrame mainFrame;
 
-  public QuestionDecisivePanel(MainFrame mainFrame) {
+  public DecideTypeQuestionPanel(MainFrame mainFrame) {
     this.mainFrame = mainFrame;
     setMinimumSize(new Dimension(1200, 800));
     init();
@@ -62,7 +62,7 @@ public class QuestionDecisivePanel extends JPanel {
     btnCreaterQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        FormQuestionPanel form = new DiscursiveCreatQuest(mainFrame);
+        FormQuestionPanel form = new FormDicursiveQuestionPanel(mainFrame);
         mainFrame.showForm(null, form);
       }
     });
@@ -76,7 +76,7 @@ public class QuestionDecisivePanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getActionCommand().equals("Questão objetiva")) {
-          FormQuestionPanel form = new ObjectiveCreatQuest(mainFrame);
+          FormQuestionPanel form = new FormObjectiveQuestionPanel(mainFrame);
           mainFrame.showForm(null, form);
         }
       }

@@ -1,7 +1,7 @@
 package FE;
 
 import BE.domain.base.Question;
-import BE.domain.base.Type;
+import BE.domain.base.TypeQuestion;
 import BE.services.QuestionService;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -16,7 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class QuestionPanel extends JPanel {
+public class QuestionTablePanel extends JPanel {
 
   MainFrame frame;
   QuestionTableModel tableModel;
@@ -28,7 +28,7 @@ public class QuestionPanel extends JPanel {
 
   private JTable tableQuestions;
 
-  public QuestionPanel(MainFrame frame) {
+  public QuestionTablePanel(MainFrame frame) {
     this.frame = frame;
 
     setLayout(new BorderLayout(10, 10));
@@ -99,15 +99,15 @@ public class QuestionPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent event) {
 
-        if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion().equals(Type.OBJECTIVE)) {
+        if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
           // se for questão objetiva chama a ObjectiveCreatQuest
-          ObjectiveCreatQuest objectiveCreatQuest = new ObjectiveCreatQuest(frame,
+          FormObjectiveQuestionPanel objectiveCreatQuest = new FormObjectiveQuestionPanel(frame,
               tableModel.getQuestion(tableQuestions.getSelectedRow()));
           frame.showForm(objectiveCreatQuest.getQuestion(), objectiveCreatQuest);
 
         } else {
           // se for questão discursiva chama a DiscursiveCreatQuest
-          DiscursiveCreatQuest discursiveCreatQuest = new DiscursiveCreatQuest(frame);
+          FormDicursiveQuestionPanel discursiveCreatQuest = new FormDicursiveQuestionPanel(frame);
           frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), discursiveCreatQuest);
 
         }
@@ -122,7 +122,7 @@ public class QuestionPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         Question quest = tableModel.getQuestion(tableQuestions.getSelectedRow());
-        int answer = JOptionPane.showConfirmDialog(QuestionPanel.this, "Você deseja remover essa tarefa ?", "The Game",
+        int answer = JOptionPane.showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?", "The Game",
             JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
           QuestionService.deleteQuestion(quest);
