@@ -13,9 +13,6 @@ public class MainFrame extends JFrame {
   private HomePanel homePanel;
   private QuestionTablePanel questionPanel;
 
-  // private FormQuestionPanel formQuestionPanel;
-  // private FormQuestionPanel formQuestionPanel2;
-
   private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
   public static int INDEX_OBJECTIVE = 0; // é public para outras classes usarem
@@ -54,11 +51,11 @@ public class MainFrame extends JFrame {
     this.questionDecisivePanel = new DecideTypeQuestionPanel(this);
     this.cardsPanel.add(this.questionDecisivePanel, DecideTypeQuestionPanel.class.getName());
 
-    this.formQuestionPanels[0] = new FormObjectiveQuestionPanel(this);
+    this.formQuestionPanels[INDEX_OBJECTIVE] = new FormObjectiveQuestionPanel(this);
     this.cardsPanel.add(this.formQuestionPanels[INDEX_OBJECTIVE],
         formQuestionPanels[INDEX_OBJECTIVE].getClass().getName());
 
-    this.formQuestionPanels[1] = new FormDicursiveQuestionPanel(this);
+    this.formQuestionPanels[INDEX_DISCURSIVE] = new FormDicursiveQuestionPanel(this);
     this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE],
         formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
 

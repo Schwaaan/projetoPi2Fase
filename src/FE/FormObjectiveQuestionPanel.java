@@ -5,16 +5,14 @@ import BE.domain.ObjectiveQuestion;
 import BE.domain.base.Question;
 import BE.services.QuestionService;
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -38,6 +36,9 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
   private JCheckBox checkBoxCTrue;
 
   private JButton saveBtn;
+  private ButtonGroup btnGroupAltC;
+  private ButtonGroup btnGroupAltB;
+  private ButtonGroup btnGroupAltA;
 
   public FormObjectiveQuestionPanel(MainFrame frame) {
     super(frame);
@@ -53,20 +54,28 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           textFieldA.setText("");
           textFieldB.setText("");
           textFieldC.setText("");
-          checkBoxAFalse.setSelected(false);
-          checkBoxATrue.setSelected(false);
-          checkBoxBFalse.setSelected(false);
-          checkBoxBTrue.setSelected(false);
-          checkBoxCFalse.setSelected(false);
-          checkBoxCTrue.setSelected(false);
+
+          btnGroupAltA.clearSelection();
+          btnGroupAltB.clearSelection();
+          btnGroupAltC.clearSelection();
+
         } else {
           ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
+
           getIdTxt().setText(Integer.toString(question.getId()));
           typeQuestionTxt.setText(String.valueOf(objectiveQuestion.getTypeQuestion()));
           getQuestionTxt().setText(objectiveQuestion.getQuestion());
+
           textFieldA.setText(objectiveQuestion.getAlternativeList().get(0).getAlternative());
           textFieldB.setText(objectiveQuestion.getAlternativeList().get(1).getAlternative());
           textFieldC.setText(objectiveQuestion.getAlternativeList().get(2).getAlternative());
+
+          checkBoxAFalse.setSelected(!objectiveQuestion.getAlternativeList().get(0).getRigthAlternative());
+          checkBoxATrue.setSelected(objectiveQuestion.getAlternativeList().get(0).getRigthAlternative());
+          checkBoxBFalse.setSelected(!objectiveQuestion.getAlternativeList().get(1).getRigthAlternative());
+          checkBoxBTrue.setSelected(objectiveQuestion.getAlternativeList().get(1).getRigthAlternative());
+          checkBoxCFalse.setSelected(!objectiveQuestion.getAlternativeList().get(2).getRigthAlternative());
+          checkBoxCTrue.setSelected(objectiveQuestion.getAlternativeList().get(2).getRigthAlternative());
         }
       }
     });
@@ -82,9 +91,9 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     addComponent(label, 7, 2, 1, 1);
     label = new JLabel("F");
     addComponent(label, 7, 3, 1, 1);
-    ButtonGroup btnGroupAltA = new ButtonGroup();
-    ButtonGroup btnGroupAltB = new ButtonGroup();
-    ButtonGroup btnGroupAltC = new ButtonGroup();
+    btnGroupAltA = new ButtonGroup();
+    btnGroupAltB = new ButtonGroup();
+    btnGroupAltC = new ButtonGroup();
 
     label = new JLabel("1) ");
     label.setForeground(Color.BLACK);
@@ -168,7 +177,9 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
               new Alternative(textFieldB.getText(), checkBoxBTrue.isSelected()),
               new Alternative(textFieldC.getText(), checkBoxCTrue.isSelected()));
 
-          Question quest = new ObjectiveQuestion(getQuestionTxt().getText(), alternativeList);
+          System.out.println(alternativeList.get(0).getRigthAlternative());
+          
+              Question quest = new ObjectiveQuestion(getQuestionTxt().getText(), alternativeList);
 
           if (Objects.isNull(getQuestion())) {
             quest.createQuestion();

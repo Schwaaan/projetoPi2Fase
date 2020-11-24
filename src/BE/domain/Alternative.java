@@ -3,7 +3,7 @@ package BE.domain;
 public class Alternative {
 
   private String alternative;
-  private boolean rightAlternative; // proponho alterar para rigthAlternative (alternativa certa) proposta aceita by jair lindoso
+  private boolean rightAlternative;
 
   public Alternative(String text, boolean isTrue) {
     this.alternative = text;
