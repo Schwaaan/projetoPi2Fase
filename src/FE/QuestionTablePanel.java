@@ -101,14 +101,19 @@ public class QuestionTablePanel extends JPanel {
 
         if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
           // se for questão objetiva chama a ObjectiveCreatQuest
-          FormObjectiveQuestionPanel objectiveCreatQuest = new FormObjectiveQuestionPanel(frame,
-              tableModel.getQuestion(tableQuestions.getSelectedRow()));
-          frame.showForm(objectiveCreatQuest.getQuestion(), objectiveCreatQuest);
+          // FormObjectiveQuestionPanel objectiveCreatQuest = new
+          // FormObjectiveQuestionPanel(frame,
+          // tableModel.getQuestion(tableQuestions.getSelectedRow()));
+          // frame.showForm(objectiveCreatQuest.getQuestion(), objectiveCreatQuest);
+
+          frame.showForm(frame.getFormQuestionPanels()[MainFrame.INDEX_OBJECTIVE].getQuestion(), MainFrame.INDEX_OBJECTIVE);
 
         } else {
           // se for questão discursiva chama a DiscursiveCreatQuest
-          FormDicursiveQuestionPanel discursiveCreatQuest = new FormDicursiveQuestionPanel(frame);
-          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), discursiveCreatQuest);
+          // FormDicursiveQuestionPanel discursiveCreatQuest = new FormDicursiveQuestionPanel(frame);
+          // frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), discursiveCreatQuest);
+
+          frame.showForm(frame.getFormQuestionPanels()[MainFrame.INDEX_DISCURSIVE].getQuestion(), MainFrame.INDEX_DISCURSIVE);
 
         }
       }
@@ -122,8 +127,8 @@ public class QuestionTablePanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         Question quest = tableModel.getQuestion(tableQuestions.getSelectedRow());
-        int answer = JOptionPane.showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?", "The Game",
-            JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int answer = JOptionPane.showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
+            "The Game", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
           QuestionService.deleteQuestion(quest);
           tableModel.delete(quest);

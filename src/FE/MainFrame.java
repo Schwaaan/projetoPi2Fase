@@ -12,8 +12,15 @@ public class MainFrame extends JFrame {
   private JPanel cardsPanel;
   private HomePanel homePanel;
   private QuestionTablePanel questionPanel;
-  private FormQuestionPanel formQuestionPanel;
-  private FormQuestionPanel formQuestionPanel2;
+
+  // private FormQuestionPanel formQuestionPanel;
+  // private FormQuestionPanel formQuestionPanel2;
+
+  private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
+
+  public static int INDEX_OBJECTIVE = 0; // é public para outras classes usarem
+  public static int INDEX_DISCURSIVE = 1; // é public para outras classes usarem
+
   private DecideTypeQuestionPanel questionDecisivePanel;
 
   public MainFrame() {
@@ -27,6 +34,10 @@ public class MainFrame extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
+  public FormQuestionPanel[] getFormQuestionPanels() {
+    return this.formQuestionPanels;
+  }
+
   public void draw() {
     pack();
     setLocationRelativeTo(null);
@@ -38,31 +49,38 @@ public class MainFrame extends JFrame {
     this.cardsPanel.add(this.homePanel, HomePanel.class.getName());
 
     this.questionPanel = new QuestionTablePanel(this);
-    this.cardsPanel.add(this.questionPanel,
-        QuestionTablePanel.class.getName());// criar cards e adicionar dentro dos
+    this.cardsPanel.add(this.questionPanel, QuestionTablePanel.class.getName());// criar cards e adicionar dentro dos
 
     this.questionDecisivePanel = new DecideTypeQuestionPanel(this);
     this.cardsPanel.add(this.questionDecisivePanel, DecideTypeQuestionPanel.class.getName());
 
-    this.formQuestionPanel = new FormObjectiveQuestionPanel(this);
-    this.cardsPanel.add(this.formQuestionPanel, FormObjectiveQuestionPanel.class.getName());
+    // this.formQuestionPanel = new FormObjectiveQuestionPanel(this);
+    // this.cardsPanel.add(this.formQuestionPanel,
+    // FormObjectiveQuestionPanel.class.getName());
 
-    this.formQuestionPanel2 = new FormDicursiveQuestionPanel(this);
-    this.cardsPanel.add(this.formQuestionPanel2, FormDicursiveQuestionPanel.class.getName());
+    // this.formQuestionPanel2 = new FormDicursiveQuestionPanel(this);
+    // this.cardsPanel.add(this.formQuestionPanel2,
+    // FormDicursiveQuestionPanel.class.getName());
+
+    this.formQuestionPanels[0] = new FormObjectiveQuestionPanel(this);
+    this.cardsPanel.add(this.formQuestionPanels[INDEX_OBJECTIVE], formQuestionPanels[INDEX_OBJECTIVE].getClass().getName());
+
+    this.formQuestionPanels[1] = new FormDicursiveQuestionPanel(this);
+    this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE], formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
 
   }
 
   public void showHomePanel() {
-    this.layout
-        .show(this.cardsPanel, HomePanel.class.getName()); // mostrar cards que esta no layout
+    this.layout.show(this.cardsPanel, HomePanel.class.getName()); // mostrar cards que esta no layout
     // tem que ter um para cada card
   }
 
-  public void showForm(Question question, FormQuestionPanel formQuestionPanel) {
-    this.formQuestionPanel = formQuestionPanel;
-    formQuestionPanel.setQuestion(question);
-    formQuestionPanel.validateQuestion();
-    this.layout.show(this.cardsPanel, formQuestionPanel.getClass().getName());
+  public void showForm(Question question, int index) {
+    // this.formQuestionPanel = formQuestionPanel;
+
+    formQuestionPanels[index].setQuestion(question);
+    formQuestionPanels[index].validateQuestion();
+    this.layout.show(this.cardsPanel, formQuestionPanels[index].getClass().getName());
   }
 
   public void showQuestionPanel() {

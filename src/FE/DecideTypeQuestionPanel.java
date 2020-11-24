@@ -14,13 +14,18 @@ import javax.swing.JPanel;
 
 public class DecideTypeQuestionPanel extends JPanel {
 
-  private MainFrame mainFrame;
+  private MainFrame frame;
+  // private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
   public DecideTypeQuestionPanel(MainFrame mainFrame) {
-    this.mainFrame = mainFrame;
+    this.frame = mainFrame;
     setMinimumSize(new Dimension(1200, 800));
     init();
   }
+
+  // public void setArrayFormQuestionPanel() {
+  //   this.formQuestionPanels = mainFrame.getFormQuestionPanels();
+  // }
 
   private void init() {
 
@@ -62,8 +67,9 @@ public class DecideTypeQuestionPanel extends JPanel {
     btnCreaterQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        FormQuestionPanel form = new FormDicursiveQuestionPanel(mainFrame);
-        mainFrame.showForm(null, form);
+        // FormQuestionPanel form = new FormDicursiveQuestionPanel(mainFrame);
+        // FormQuestionPanel[] forms = mainFrame.getFormQuestionPanels();
+        frame.showForm(null, MainFrame.INDEX_DISCURSIVE);
       }
     });
     btnCreaterQuestions.setFont(new Font("TimesRoman", 1, 24));
@@ -76,8 +82,9 @@ public class DecideTypeQuestionPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getActionCommand().equals("Questão objetiva")) {
-          FormQuestionPanel form = new FormObjectiveQuestionPanel(mainFrame);
-          mainFrame.showForm(null, form);
+          // FormQuestionPanel form = new FormObjectiveQuestionPanel(mainFrame);
+          // FormQuestionPanel[] forms = mainFrame.getFormQuestionPanels();
+          frame.showForm(null, MainFrame.INDEX_OBJECTIVE);
         }
       }
     });
