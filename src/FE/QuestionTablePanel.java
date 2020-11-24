@@ -1,6 +1,7 @@
 package FE;
 
-import BE.domain.Question;
+import BE.domain.base.Question;
+import BE.domain.base.TypeQuestion;
 import BE.services.QuestionService;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,7 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class QuestionPanel extends JPanel {
+public class QuestionTablePanel extends JPanel {
 
   MainFrame frame;
   QuestionTableModel tableModel;
@@ -23,10 +24,11 @@ public class QuestionPanel extends JPanel {
   private JButton btnCreate;
   private JButton btnChange;
   private JButton btnRemove;
+  private JButton btnInit;
 
   private JTable tableQuestions;
 
-  public QuestionPanel(MainFrame frame) {
+  public QuestionTablePanel(MainFrame frame) {
     this.frame = frame;
 
     setLayout(new BorderLayout(10, 10));
@@ -35,14 +37,14 @@ public class QuestionPanel extends JPanel {
     createTable();
   }
 
-  public void reload(){
+  public void reload() {
     tableModel.load(QuestionService.getQuestions());
   }
 
   private void createTable() {
     tableModel = new QuestionTableModel(QuestionService.getQuestions());
     tableQuestions = new JTable(tableModel);
-    tableQuestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//uma linha de cada vez
+    tableQuestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// uma linha de cada vez
 
     tableQuestions.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
       @Override
@@ -57,9 +59,6 @@ public class QuestionPanel extends JPanel {
       }
 
     });
-
-    
-
     JScrollPane scroll = new JScrollPane(tableQuestions);
 
     add(scroll, BorderLayout.CENTER);
@@ -70,12 +69,23 @@ public class QuestionPanel extends JPanel {
     FlowLayout layout = (FlowLayout) panelBtn.getLayout();
     layout.setAlignment(FlowLayout.RIGHT);
 
+    btnInit = new JButton("Inicio");
+
+    btnInit.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent event) {
+        frame.showHomePanel();
+      }
+    });
+
+    panelBtn.add(btnInit);
+
     btnCreate = new JButton("Adicionar");
 
     btnCreate.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent event) {
-        frame.showCreatQuest(null);
+        frame.showQuestionDecisivePanel();
       }
     });
 
@@ -88,7 +98,13 @@ public class QuestionPanel extends JPanel {
     btnChange.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent event) {
-        frame.showCreatQuest(tableModel.getQuestion(tableQuestions.getSelectedRow()));
+
+        if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
+          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_OBJECTIVE);
+
+        } else {
+          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_DISCURSIVE);
+        }
       }
     });
 
@@ -100,14 +116,15 @@ public class QuestionPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         Question quest = tableModel.getQuestion(tableQuestions.getSelectedRow());
-        int answer = JOptionPane.showConfirmDialog(QuestionPanel.this, "Você deseja remover essa tarefa ?", "The Game", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) ;
-        if(answer == JOptionPane.YES_OPTION){
+        int answer = JOptionPane.showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
+            "The Game", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (answer == JOptionPane.YES_OPTION) {
           QuestionService.deleteQuestion(quest);
           tableModel.delete(quest);
         }
       }
     });
-
+    disableBtns();
     panelBtn.add(btnRemove);
 
     add(panelBtn, BorderLayout.NORTH);

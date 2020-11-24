@@ -11,15 +11,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class HomePanel extends JPanel {
+public class DecideTypeQuestionPanel extends JPanel {
 
-  private MainFrame mainFrame;
+  private MainFrame frame;
+  // private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
-  public HomePanel(MainFrame mainFrame) {
-    this.mainFrame = mainFrame;
+  public DecideTypeQuestionPanel(MainFrame mainFrame) {
+    this.frame = mainFrame;
     setMinimumSize(new Dimension(1200, 800));
     init();
   }
+
+  // public void setArrayFormQuestionPanel() {
+  //   this.formQuestionPanels = mainFrame.getFormQuestionPanels();
+  // }
 
   private void init() {
 
@@ -57,11 +62,13 @@ public class HomePanel extends JPanel {
     panelbt.setLayout(new GridLayout(4, 1, 5, 10));
     panelbt.setBackground(new Color(0, 238, 224));
 
-    btnCreaterQuestions = new JButton("Criar Questões");
-    btnCreaterQuestions.addActionListener(new ActionListener(){
+    btnCreaterQuestions = new JButton("Questão discursiva");
+    btnCreaterQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        mainFrame.showQuestionDecisivePanel();
+        // FormQuestionPanel form = new FormDicursiveQuestionPanel(mainFrame);
+        // FormQuestionPanel[] forms = mainFrame.getFormQuestionPanels();
+        frame.showForm(null, MainFrame.INDEX_DISCURSIVE);
       }
     });
     btnCreaterQuestions.setFont(new Font("TimesRoman", 1, 24));
@@ -69,12 +76,14 @@ public class HomePanel extends JPanel {
     btnCreaterQuestions.setRolloverEnabled(false);
     panelbt.add(btnCreaterQuestions);
 
-    btnReadQuestions = new JButton("Ver Questões");
+    btnReadQuestions = new JButton("Questão objetiva");
     btnReadQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getActionCommand().equals("Ver Questões")) {
-          mainFrame.showQuestionPanel();
+        if (actionEvent.getActionCommand().equals("Questão objetiva")) {
+          // FormQuestionPanel form = new FormObjectiveQuestionPanel(mainFrame);
+          // FormQuestionPanel[] forms = mainFrame.getFormQuestionPanels();
+          frame.showForm(null, MainFrame.INDEX_OBJECTIVE);
         }
       }
     });

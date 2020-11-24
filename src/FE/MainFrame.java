@@ -1,59 +1,81 @@
 package FE;
 
+import BE.domain.base.Question;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BE.domain.Question;
-
 public class MainFrame extends JFrame {
 
-    private CardLayout layout;
-    private JPanel cardsPanel;
-    private HomePanel homePanel;
-    private QuestionPanel questionPanel;
-    private CreatQuestPanel creatQuestPanel;
+  private CardLayout layout;
+  private JPanel cardsPanel;
+  private HomePanel homePanel;
+  private QuestionTablePanel questionPanel;
 
-    public MainFrame() {
-        this.layout = new CardLayout();
-        this.cardsPanel = new JPanel();
-        this.cardsPanel.setLayout(layout);
-        add(cardsPanel);
-        this.createCards();
-        
-        this.showHomePanel(this.homePanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+  private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
-    public void draw() {
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
+  public static final int INDEX_OBJECTIVE = 0; // é public para outras classes usarem
+  public static final int INDEX_DISCURSIVE = 1; // é public para outras classes usarem
 
-    private void createCards() {
-        this.homePanel = new HomePanel(this);
-        this.cardsPanel.add(this.homePanel, HomePanel.class.getName());
+  private DecideTypeQuestionPanel questionDecisivePanel;
 
-        this.questionPanel = new QuestionPanel(this);
-        this.cardsPanel.add(this.questionPanel, QuestionPanel.class.getName());// criar cards e adicionar dentro dos
-                                                                               // panel
-        this.creatQuestPanel = new CreatQuestPanel(this);
-        this.cardsPanel.add(this.creatQuestPanel, CreatQuestPanel.class.getName());
-    }
+  public MainFrame() {
+    this.layout = new CardLayout();
+    this.cardsPanel = new JPanel();
+    this.cardsPanel.setLayout(layout);
+    add(cardsPanel);
+    this.createCards();
 
-    public void showHomePanel(JPanel jPanel) {
-        this.layout.show(this.cardsPanel, jPanel.getClass().getName()); // mostrar cards que esta no layout
-        // tem que ter um para cada card
-    }
+    this.showHomePanel();
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
 
-    public void showCreatQuest(Question question) {
-        this.creatQuestPanel.setQuestion(question);
-        this.layout.show(this.cardsPanel, CreatQuestPanel.class.getName());
-    }
+  public FormQuestionPanel[] getFormQuestionPanels() {
+    return this.formQuestionPanels;
+  }
 
-	public void showQuestionPanel() {
-        questionPanel.reload();
-        this.layout.show(this.cardsPanel, QuestionPanel.class.getName());
-	}
+  public void draw() {
+    pack();
+    setLocationRelativeTo(null);
+    setVisible(true);
+  }
+
+  private void createCards() {
+    this.homePanel = new HomePanel(this);
+    this.cardsPanel.add(this.homePanel, HomePanel.class.getName());
+
+    this.questionPanel = new QuestionTablePanel(this);
+    this.cardsPanel.add(this.questionPanel, QuestionTablePanel.class.getName());// criar cards e adicionar dentro dos
+
+    this.questionDecisivePanel = new DecideTypeQuestionPanel(this);
+    this.cardsPanel.add(this.questionDecisivePanel, DecideTypeQuestionPanel.class.getName());
+
+    this.formQuestionPanels[INDEX_OBJECTIVE] = new FormObjectiveQuestionPanel(this);
+    this.cardsPanel.add(this.formQuestionPanels[INDEX_OBJECTIVE],
+        formQuestionPanels[INDEX_OBJECTIVE].getClass().getName());
+
+    this.formQuestionPanels[INDEX_DISCURSIVE] = new FormDicursiveQuestionPanel(this);
+    this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE],
+        formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
+
+  }
+
+  public void showHomePanel() {
+    this.layout.show(this.cardsPanel, HomePanel.class.getName()); // mostrar cards que esta no layout
+    // tem que ter um para cada card
+  }
+
+  public void showForm(Question question, int index) {
+    formQuestionPanels[index].setQuestion(question); // método chamado da classe pai e executado na filha
+    this.layout.show(this.cardsPanel, formQuestionPanels[index].getClass().getName()); // aqui chama pela classe pai uma filha
+  }
+
+  public void showQuestionPanel() {
+    questionPanel.reload();
+    this.layout.show(this.cardsPanel, QuestionTablePanel.class.getName());
+  }
+
+  public void showQuestionDecisivePanel() {
+    this.layout.show(this.cardsPanel, DecideTypeQuestionPanel.class.getName());
+  }
 }

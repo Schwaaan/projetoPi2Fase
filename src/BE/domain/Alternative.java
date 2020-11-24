@@ -2,27 +2,12 @@ package BE.domain;
 
 public class Alternative {
 
-  private int id;
-  private Question question;
   private String alternative;
-  private boolean accepted; // proponho alterar para rigthAlternative (alternativa certa)
-  private boolean deleted;
+  private boolean rightAlternative;
 
-  public Alternative(int id, Question question, String alternative, boolean accepted,
-      boolean deleted) {
-    this.id = id;
-    this.question = question;
-    setAlternative(alternative);
-    setAccepted(accepted);
-    setDeleted(deleted);
-  }
-
-  public int getId() {
-    return this.id;
-  }
-
-  public int getAlternativeQuestionId() {
-    return this.question.getId();
+  public Alternative(String text, boolean isTrue) {
+    this.alternative = text;
+    this.rightAlternative = isTrue;
   }
 
   public void setAlternative(String alternative) {
@@ -33,32 +18,17 @@ public class Alternative {
     return this.alternative;
   }
 
-  public void setAccepted(boolean accepted) {
-    this.accepted = accepted;
+  public void setRigthAlternative(boolean rigthAlternative) {
+    this.rightAlternative = rigthAlternative;
   }
 
-  public boolean getAccepted() {
-    return this.accepted;
-  }
-
-  public void setDeleted(boolean deleted) {
-    this.deleted = deleted;
-  }
-
-  public boolean getDeleted() {
-    return this.deleted;
-  }
-
-  public Question getAlternativeQuestion() {
-    return this.question;
+  public boolean getRigthAlternative() {
+    return this.rightAlternative;
   }
 
   @Override
   public String toString() {
-    return String.format("Resposta à questão '%s': '%s'\n",
-        getAlternativeQuestion().getQuestion(),
-        getAlternative());
+    return String.format("%s: '%s'\n",
+          getClass().getName(), getAlternative());
   }
-
-
 }
