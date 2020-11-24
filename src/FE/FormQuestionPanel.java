@@ -58,7 +58,7 @@ public abstract class FormQuestionPanel extends JPanel {
     addComponent(scrollPane, 2, 1, 1, 5);
   }
 
-  public void createTypeQuestionComponent() {}
+  public abstract void createTypeQuestionComponent();
 
   private void createButtons() {
     JPanel btnPanel = new JPanel();
@@ -75,7 +75,7 @@ public abstract class FormQuestionPanel extends JPanel {
     addComponent(btnPanel, 11, 1);
   }
 
-  public void createSaveButton() {}
+  public abstract void createSaveButton();
 
   private void createCancelButton() {
     cancelBtn = new JButton("Cancelar");

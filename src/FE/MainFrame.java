@@ -14,8 +14,8 @@ public class MainFrame extends JFrame {
 
   private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
-  public static int INDEX_OBJECTIVE = 0; // é public para outras classes usarem
-  public static int INDEX_DISCURSIVE = 1; // é public para outras classes usarem
+  public static final int INDEX_OBJECTIVE = 0; // é public para outras classes usarem
+  public static final int INDEX_DISCURSIVE = 1; // é public para outras classes usarem
 
   private DecideTypeQuestionPanel questionDecisivePanel;
 
@@ -66,7 +66,6 @@ public class MainFrame extends JFrame {
   }
 
   public void showForm(Question question, int index) {
-    // aqui estaria a proposta do polimorfismo
     formQuestionPanels[index].setQuestion(question); // método chamado da classe pai e executado na filha
     this.layout.show(this.cardsPanel, formQuestionPanels[index].getClass().getName()); // aqui chama pela classe pai uma filha
   }
