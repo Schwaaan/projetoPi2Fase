@@ -36,6 +36,10 @@ public class FormQuestionPanel extends JPanel {
     createButtons();
   }
 
+  public JTextField getIdTxt() {
+    return idTxt;
+  }
+
   public void validateQuestion(){};
 
   private void createForm() {
