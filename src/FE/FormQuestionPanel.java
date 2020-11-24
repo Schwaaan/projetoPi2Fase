@@ -15,9 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 
-public class FormQuestionPanel extends JPanel {
+public abstract class FormQuestionPanel extends JPanel {
 
-  private Question question;
   private JTextArea questionTxt;
   private JTextField idTxt;
   private JButton saveBtn;
@@ -40,7 +39,6 @@ public class FormQuestionPanel extends JPanel {
     return idTxt;
   }
 
-  public void validateQuestion(){};
 
   private void createForm() {
     JLabel label;
@@ -118,13 +116,9 @@ public class FormQuestionPanel extends JPanel {
     return questionTxt;
   }
 
-  public void setQuestion(Question question) {
-    this.question = question;
-  }
+  public abstract void setQuestion(Question question);
 
-  public Question getQuestion() {
-    return question;
-  }
+  public abstract Question getQuestion();
 }
 
 

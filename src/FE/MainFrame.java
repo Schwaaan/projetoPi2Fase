@@ -54,19 +54,13 @@ public class MainFrame extends JFrame {
     this.questionDecisivePanel = new DecideTypeQuestionPanel(this);
     this.cardsPanel.add(this.questionDecisivePanel, DecideTypeQuestionPanel.class.getName());
 
-    // this.formQuestionPanel = new FormObjectiveQuestionPanel(this);
-    // this.cardsPanel.add(this.formQuestionPanel,
-    // FormObjectiveQuestionPanel.class.getName());
-
-    // this.formQuestionPanel2 = new FormDicursiveQuestionPanel(this);
-    // this.cardsPanel.add(this.formQuestionPanel2,
-    // FormDicursiveQuestionPanel.class.getName());
-
     this.formQuestionPanels[0] = new FormObjectiveQuestionPanel(this);
-    this.cardsPanel.add(this.formQuestionPanels[INDEX_OBJECTIVE], formQuestionPanels[INDEX_OBJECTIVE].getClass().getName());
+    this.cardsPanel.add(this.formQuestionPanels[INDEX_OBJECTIVE],
+        formQuestionPanels[INDEX_OBJECTIVE].getClass().getName());
 
     this.formQuestionPanels[1] = new FormDicursiveQuestionPanel(this);
-    this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE], formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
+    this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE],
+        formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
 
   }
 
@@ -76,11 +70,9 @@ public class MainFrame extends JFrame {
   }
 
   public void showForm(Question question, int index) {
-    // this.formQuestionPanel = formQuestionPanel;
-
-    formQuestionPanels[index].setQuestion(question);
-    formQuestionPanels[index].validateQuestion();
-    this.layout.show(this.cardsPanel, formQuestionPanels[index].getClass().getName());
+    // aqui estaria a proposta do polimorfismo
+    formQuestionPanels[index].setQuestion(question); // método chamado da classe pai e executado na filha
+    this.layout.show(this.cardsPanel, formQuestionPanels[index].getClass().getName()); // aqui chama pela classe pai uma filha
   }
 
   public void showQuestionPanel() {

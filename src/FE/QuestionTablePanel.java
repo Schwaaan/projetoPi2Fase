@@ -100,20 +100,10 @@ public class QuestionTablePanel extends JPanel {
       public void actionPerformed(ActionEvent event) {
 
         if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
-          // se for questão objetiva chama a ObjectiveCreatQuest
-          // FormObjectiveQuestionPanel objectiveCreatQuest = new
-          // FormObjectiveQuestionPanel(frame,
-          // tableModel.getQuestion(tableQuestions.getSelectedRow()));
-          // frame.showForm(objectiveCreatQuest.getQuestion(), objectiveCreatQuest);
-
-          frame.showForm(frame.getFormQuestionPanels()[MainFrame.INDEX_OBJECTIVE].getQuestion(), MainFrame.INDEX_OBJECTIVE);
+          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_OBJECTIVE);
 
         } else {
-          // se for questão discursiva chama a DiscursiveCreatQuest
-          // FormDicursiveQuestionPanel discursiveCreatQuest = new FormDicursiveQuestionPanel(frame);
-          // frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), discursiveCreatQuest);
-
-          frame.showForm(frame.getFormQuestionPanels()[MainFrame.INDEX_DISCURSIVE].getQuestion(), MainFrame.INDEX_DISCURSIVE);
+          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_DISCURSIVE);
 
         }
       }

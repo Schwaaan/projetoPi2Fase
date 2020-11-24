@@ -56,13 +56,18 @@ public class QuestionTableModel extends AbstractTableModel {
           value = question.getQuestion();
           break;
         case 2:
-          if (question.getTypeQuestion().equals(TypeQuestion.DISCURSIVE)) {
-            value = "Discursiva";
-            break;
-          } else {
-            value = "Objetiva";
-            break;
-          }
+          value = String.valueOf(question.getTypeQuestion());
+          break;
+          // tirei esse if pois tinha algum problema aqui
+          // deixarei comentado para caso queiramos tentar melhorar isso
+          // eu sugiro fazermos essa transformação com um toString ou no próprio enumerador
+          // if (question.getTypeQuestion().equals(TypeQuestion.DISCURSIVE)) {
+          //   value = "Discursiva";
+          //   break;
+          // } else {
+          //   value = "Objetiva";
+          //   break;
+          // }
         default:
           System.err.printf("[ERRO] Índice de coluna inválido: %d\n", colIndex);
           break;

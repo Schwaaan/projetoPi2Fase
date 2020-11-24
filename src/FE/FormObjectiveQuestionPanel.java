@@ -41,19 +41,14 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
 
   public FormObjectiveQuestionPanel(MainFrame frame) {
     super(frame);
-  }
+    this.question = null;
 
-  public FormObjectiveQuestionPanel(MainFrame frame,Question question) {
-    super(frame);
-    this.question = question;
-  }
-
-  @Override
-  public void validateQuestion() {
     addComponentListener(new ComponentAdapter() {
       @Override
       public void componentShown(ComponentEvent arg0) {
         if (Objects.isNull(question)) {
+          getIdTxt().setText("");
+          typeQuestionTxt.setText("");
           getQuestionTxt().setText("");
           textFieldA.setText("");
           textFieldB.setText("");
@@ -66,6 +61,8 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           checkBoxCTrue.setSelected(false);
         } else {
           ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
+          getIdTxt().setText(Integer.toString(question.getId()));
+          typeQuestionTxt.setText(String.valueOf(objectiveQuestion.getTypeQuestion()));
           getQuestionTxt().setText(objectiveQuestion.getQuestion());
           textFieldA.setText(objectiveQuestion.getAlternativeList().get(0).getAlternative());
           textFieldB.setText(objectiveQuestion.getAlternativeList().get(1).getAlternative());
@@ -76,7 +73,6 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
   }
 
   private void createAlternatives() {
-    // ActionEventHandler handler = new ActionEventHandler();
     JLabel label;
 
     label = new JLabel("Alternativas: ");
@@ -113,7 +109,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     checkBoxBTrue = new JCheckBox();
     btnGroupAltB.add(checkBoxBTrue);
     addComponent(checkBoxBTrue, 9, 2);
-    
+
     checkBoxBFalse = new JCheckBox();
     btnGroupAltB.add(checkBoxBFalse);
     addComponent(checkBoxBFalse, 9, 3);
@@ -164,42 +160,37 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     saveBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (!getQuestionTxt().getText().isEmpty() &&
-            !textFieldA.getText().isEmpty() &&
-            !textFieldB.getText().isEmpty()
+        if (!getQuestionTxt().getText().isEmpty() && !textFieldA.getText().isEmpty() && !textFieldB.getText().isEmpty()
             && !textFieldC.getText().isEmpty()) {
 
-          List<Alternative> alternativeList = this
-              .getListAlternative(new Alternative(textFieldA.getText(), checkBoxATrue.isSelected()),
-                  new Alternative(textFieldB.getText(), checkBoxBTrue.isSelected()),
-                  new Alternative(textFieldC.getText(), checkBoxCTrue.isSelected()));
+          List<Alternative> alternativeList = this.getListAlternative(
+              new Alternative(textFieldA.getText(), checkBoxATrue.isSelected()),
+              new Alternative(textFieldB.getText(), checkBoxBTrue.isSelected()),
+              new Alternative(textFieldC.getText(), checkBoxCTrue.isSelected()));
 
-          Question quest = new ObjectiveQuestion(getQuestionTxt().getText(),
-              alternativeList);
+          Question quest = new ObjectiveQuestion(getQuestionTxt().getText(), alternativeList);
 
           if (Objects.isNull(getQuestion())) {
             quest.createQuestion();
-            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!",
-                "The Game",
+            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!", "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
             quest.setId(question.getId());
+            quest.setTypeQuestion(typeQuestionTxt.getText());
             QuestionService.updateQuestion(quest);
-            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!",
-                "The Game",
+            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!", "The Game",
                 JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           }
         } else {
           JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Preencha todos os campos",
-              "Erro ao criar questão",
-              JOptionPane.INFORMATION_MESSAGE);
+              "Erro ao criar questão", JOptionPane.INFORMATION_MESSAGE);
         }
       }
 
-      private List<Alternative> getListAlternative(Alternative alternative,
-          Alternative alternative1, Alternative alternative2) {
+      private List<Alternative> getListAlternative(Alternative alternative, Alternative alternative1,
+          Alternative alternative2) {
         List<Alternative> alternatives = new ArrayList<>();
         alternatives.add(alternative);
         alternatives.add(alternative1);
