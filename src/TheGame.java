@@ -1,4 +1,4 @@
-import FE.MainFrame;
+import fe.MainFrame;
 import javax.swing.SwingUtilities;
 
 public class TheGame {

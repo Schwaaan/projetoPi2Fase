@@ -1,12 +1,13 @@
-package FE;
+package fe.panels;
 
-import BE.domain.Alternative;
-import BE.domain.ObjectiveQuestion;
-import BE.domain.base.Question;
-import BE.services.QuestionService;
-import BE.utils.ValidateText;
-import BE.utils.ValidateTextArea;
-import BE.utils.Validation;
+import be.domain.Alternative;
+import be.domain.ObjectiveQuestion;
+import be.domain.base.Question;
+import be.services.QuestionService;
+import be.utils.ValidateText;
+import be.utils.ValidateTextArea;
+import be.utils.Validation;
+import fe.MainFrame;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

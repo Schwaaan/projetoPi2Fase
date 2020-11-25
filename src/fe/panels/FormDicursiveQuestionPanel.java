@@ -1,10 +1,11 @@
-package FE;
+package fe.panels;
 
-import BE.domain.DiscursiveQuestion;
-import BE.domain.base.Question;
-import BE.services.QuestionService;
-import BE.utils.ValidateTextArea;
-import BE.utils.Validation;
+import be.domain.DiscursiveQuestion;
+import be.domain.base.Question;
+import be.services.QuestionService;
+import be.utils.ValidateTextArea;
+import be.utils.Validation;
+import fe.MainFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;

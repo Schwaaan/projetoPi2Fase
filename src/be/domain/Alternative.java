@@ -1,4 +1,4 @@
-package BE.domain;
+package be.domain;
 
 public class Alternative {
 

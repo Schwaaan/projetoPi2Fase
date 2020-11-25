@@ -1,8 +1,10 @@
-package FE;
+package fe.panels;
 
-import BE.domain.base.Question;
-import BE.domain.base.TypeQuestion;
-import BE.services.QuestionService;
+import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
+import be.services.QuestionService;
+import fe.MainFrame;
+import fe.QuestionTableModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;

@@ -1,7 +1,7 @@
-package FE;
+package fe;
 
-import BE.domain.base.Question;
-import BE.domain.base.TypeQuestion;
+import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

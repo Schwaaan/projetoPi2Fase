@@ -1,5 +1,6 @@
-package FE;
+package fe.panels;
 
+import fe.MainFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

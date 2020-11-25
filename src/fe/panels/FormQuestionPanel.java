@@ -1,6 +1,7 @@
-package FE;
+package fe.panels;
 
-import BE.domain.base.Question;
+import be.domain.base.Question;
+import fe.MainFrame;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComponent;

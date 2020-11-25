@@ -1,6 +1,6 @@
-package BE.services;
+package be.services;
 
-import BE.domain.base.Question;
+import be.domain.base.Question;
 import java.util.ArrayList;
 import java.util.List;
 
