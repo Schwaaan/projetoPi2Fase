@@ -4,6 +4,9 @@ import BE.domain.Alternative;
 import BE.domain.ObjectiveQuestion;
 import BE.domain.base.Question;
 import BE.services.QuestionService;
+import BE.utils.ValidateText;
+import BE.utils.ValidateTextArea;
+import BE.utils.Validation;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +15,6 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -29,16 +30,10 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
 
   private JTextField typeQuestionTxt;
   private JCheckBox checkBoxATrue;
-  private JCheckBox checkBoxAFalse;
   private JCheckBox checkBoxBTrue;
-  private JCheckBox checkBoxBFalse;
-  private JCheckBox checkBoxCFalse;
   private JCheckBox checkBoxCTrue;
 
   private JButton saveBtn;
-  private ButtonGroup btnGroupAltC;
-  private ButtonGroup btnGroupAltB;
-  private ButtonGroup btnGroupAltA;
 
   public FormObjectiveQuestionPanel(MainFrame frame) {
     super(frame);
@@ -54,10 +49,10 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           textFieldA.setText("");
           textFieldB.setText("");
           textFieldC.setText("");
+          checkBoxATrue.setSelected(false);
+          checkBoxBTrue.setSelected(false);
+          checkBoxCTrue.setSelected(false);
 
-          btnGroupAltA.clearSelection();
-          btnGroupAltB.clearSelection();
-          btnGroupAltC.clearSelection();
 
         } else {
           ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
@@ -70,12 +65,12 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           textFieldB.setText(objectiveQuestion.getAlternativeList().get(1).getAlternative());
           textFieldC.setText(objectiveQuestion.getAlternativeList().get(2).getAlternative());
 
-          checkBoxAFalse.setSelected(!objectiveQuestion.getAlternativeList().get(0).getRigthAlternative());
-          checkBoxATrue.setSelected(objectiveQuestion.getAlternativeList().get(0).getRigthAlternative());
-          checkBoxBFalse.setSelected(!objectiveQuestion.getAlternativeList().get(1).getRigthAlternative());
-          checkBoxBTrue.setSelected(objectiveQuestion.getAlternativeList().get(1).getRigthAlternative());
-          checkBoxCFalse.setSelected(!objectiveQuestion.getAlternativeList().get(2).getRigthAlternative());
-          checkBoxCTrue.setSelected(objectiveQuestion.getAlternativeList().get(2).getRigthAlternative());
+          checkBoxATrue
+              .setSelected(objectiveQuestion.getAlternativeList().get(0).getRigthAlternative());
+          checkBoxBTrue
+              .setSelected(objectiveQuestion.getAlternativeList().get(1).getRigthAlternative());
+          checkBoxCTrue
+              .setSelected(objectiveQuestion.getAlternativeList().get(2).getRigthAlternative());
         }
       }
     });
@@ -89,11 +84,6 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     addComponent(label, 7, 0, 1, 1);
     label = new JLabel("V");
     addComponent(label, 7, 2, 1, 1);
-    label = new JLabel("F");
-    addComponent(label, 7, 3, 1, 1);
-    btnGroupAltA = new ButtonGroup();
-    btnGroupAltB = new ButtonGroup();
-    btnGroupAltC = new ButtonGroup();
 
     label = new JLabel("1) ");
     label.setForeground(Color.BLACK);
@@ -102,12 +92,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     addComponent(textFieldA, 8, 1);
 
     checkBoxATrue = new JCheckBox();
-    btnGroupAltA.add(checkBoxATrue);
     addComponent(checkBoxATrue, 8, 2);
-
-    checkBoxAFalse = new JCheckBox();
-    btnGroupAltA.add(checkBoxAFalse);
-    addComponent(checkBoxAFalse, 8, 3);
 
     label = new JLabel("2) ");
     label.setForeground(Color.BLACK);
@@ -116,12 +101,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     addComponent(textFieldB, 9, 1);
 
     checkBoxBTrue = new JCheckBox();
-    btnGroupAltB.add(checkBoxBTrue);
     addComponent(checkBoxBTrue, 9, 2);
-
-    checkBoxBFalse = new JCheckBox();
-    btnGroupAltB.add(checkBoxBFalse);
-    addComponent(checkBoxBFalse, 9, 3);
 
     label = new JLabel("3) ");
     label.setForeground(Color.BLACK);
@@ -130,12 +110,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     addComponent(textFieldC, 10, 1);
 
     checkBoxCTrue = new JCheckBox();
-    btnGroupAltC.add(checkBoxCTrue);
     addComponent(checkBoxCTrue, 10, 2);
-
-    checkBoxCFalse = new JCheckBox();
-    btnGroupAltC.add(checkBoxCFalse);
-    addComponent(checkBoxCFalse, 10, 3);
 
     label = new JLabel();
     addComponent(label, 14, 0, 1, 1);
@@ -169,28 +144,31 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     saveBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (validator()) {
-
+        if (validateAlternatives() && validateQuestionText()) {
           List<Alternative> alternativeList = this.getListAlternative(
               new Alternative(textFieldA.getText(), checkBoxATrue.isSelected()),
               new Alternative(textFieldB.getText(), checkBoxBTrue.isSelected()),
               new Alternative(textFieldC.getText(), checkBoxCTrue.isSelected()));
 
           System.out.println(alternativeList.get(0).getRigthAlternative());
-          
-              Question quest = new ObjectiveQuestion(getQuestionTxt().getText(), alternativeList);
+
+          Question quest = new ObjectiveQuestion(getQuestionTxt().getText(), alternativeList);
 
           if (Objects.isNull(getQuestion())) {
             quest.createQuestion();
-            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!", "The Game",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane
+                .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!",
+                    "The Game",
+                    JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
             quest.setId(question.getId());
             quest.setTypeQuestion(typeQuestionTxt.getText());
             QuestionService.updateQuestion(quest);
-            JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!", "The Game",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane
+                .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!",
+                    "The Game",
+                    JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           }
         } else {
@@ -199,7 +177,8 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
         }
       }
 
-      private List<Alternative> getListAlternative(Alternative alternative, Alternative alternative1,
+      private List<Alternative> getListAlternative(Alternative alternative,
+          Alternative alternative1,
           Alternative alternative2) {
         List<Alternative> alternatives = new ArrayList<>();
         alternatives.add(alternative);
@@ -211,14 +190,19 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     setSaveBtn(saveBtn);
   }
 
-  private boolean validator() {
-    return 
-        !getQuestionTxt().getText().isEmpty() && 
-        !textFieldA.getText().isEmpty() && 
-        !textFieldB.getText().isEmpty() && 
-        !textFieldC.getText().isEmpty() &&
-        (checkBoxATrue.isSelected() || checkBoxAFalse.isSelected()) &&
-        (checkBoxBTrue.isSelected() || checkBoxBFalse.isSelected()) &&
-        (checkBoxCTrue.isSelected() || checkBoxCFalse.isSelected());
+  private boolean validateQuestionText() {
+    Validation validator = new ValidateTextArea();
+    return validator.validate(getQuestionTxt());
+  }
+
+  private boolean validateAlternatives() {
+    Validation validator = new ValidateText();
+    boolean aIsValid = validator.validate(textFieldA);
+    boolean bIsValid = validator.validate(textFieldB);
+    boolean cIsValid = validator.validate(textFieldC);
+    if(!aIsValid  && !bIsValid && !cIsValid){
+      return false;
+    }
+    return true;
   }
 }
