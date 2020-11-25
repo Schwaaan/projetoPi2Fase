@@ -3,6 +3,8 @@ package FE;
 import BE.domain.DiscursiveQuestion;
 import BE.domain.base.Question;
 import BE.services.QuestionService;
+import BE.utils.ValidateTextArea;
+import BE.utils.Validation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -64,30 +66,38 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
     saveBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (!getQuestionTxt().getText().isEmpty()) {
+        if (validateTxtArea()) {
           Question quest = new DiscursiveQuestion(getQuestionTxt().getText());
           if (question == null) {
             quest.createQuestion();
-            JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Questão criado com sucesso!", "The Game",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane
+                .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão criado com sucesso!",
+                    MainFrame.TITLE,
+                    JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
             quest.setId(Integer.parseInt(getIdTxt().getText()));
             quest.setTypeQuestion(typeQuestionTxt.getText());
             QuestionService.updateQuestion(quest);
-            JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Questão Alterada com sucesso!", "The Game",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane
+                .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão Alterada com sucesso!",
+                    MainFrame.TITLE,
+                    JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
 
           }
         } else {
           JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Preencha todos os campos",
-              "Erro ao criar questão", JOptionPane.INFORMATION_MESSAGE);
+              MainFrame.TITLE
+              , JOptionPane.INFORMATION_MESSAGE);
         }
       }
     });
-
     setSaveBtn(saveBtn);
   }
 
+  private boolean validateTxtArea() {
+    Validation validation = new ValidateTextArea();
+    return validation.validate(getQuestionTxt());
+  }
 }

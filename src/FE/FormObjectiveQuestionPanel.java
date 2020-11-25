@@ -38,6 +38,9 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
   public FormObjectiveQuestionPanel(MainFrame frame) {
     super(frame);
     this.question = null;
+    checkBoxATrue.setBackground(new Color(118, 206, 166));
+    checkBoxBTrue.setBackground(new Color(118, 206, 166));
+    checkBoxCTrue.setBackground(new Color(118, 206, 166));
 
     addComponentListener(new ComponentAdapter() {
       @Override
@@ -82,7 +85,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     label = new JLabel("Alternativas: ");
     label.setForeground(Color.BLACK);
     addComponent(label, 7, 0, 1, 1);
-    label = new JLabel("V");
+    label = new JLabel("Verdadeira");
     addComponent(label, 7, 2, 1, 1);
 
     label = new JLabel("1) ");
@@ -158,7 +161,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
             quest.createQuestion();
             JOptionPane
                 .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!",
-                    "The Game",
+                    MainFrame.TITLE,
                     JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           } else {
@@ -167,13 +170,13 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
             QuestionService.updateQuestion(quest);
             JOptionPane
                 .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!",
-                    "The Game",
+                    MainFrame.TITLE,
                     JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
           }
         } else {
           JOptionPane.showMessageDialog(FormObjectiveQuestionPanel.this, "Preencha todos os campos",
-              "Erro ao criar questão", JOptionPane.INFORMATION_MESSAGE);
+              MainFrame.TITLE, JOptionPane.INFORMATION_MESSAGE);
         }
       }
 
@@ -200,9 +203,6 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     boolean aIsValid = validator.validate(textFieldA);
     boolean bIsValid = validator.validate(textFieldB);
     boolean cIsValid = validator.validate(textFieldC);
-    if(!aIsValid  && !bIsValid && !cIsValid){
-      return false;
-    }
-    return true;
+    return aIsValid && bIsValid && cIsValid;
   }
 }

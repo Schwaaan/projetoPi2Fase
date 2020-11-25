@@ -4,6 +4,7 @@ import BE.domain.base.Question;
 import BE.domain.base.TypeQuestion;
 import BE.services.QuestionService;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +33,7 @@ public class QuestionTablePanel extends JPanel {
     this.frame = frame;
 
     setLayout(new BorderLayout(10, 10));
+    setBackground(new Color(118, 206, 166));
 
     createBtns();
     createTable();
@@ -44,8 +46,7 @@ public class QuestionTablePanel extends JPanel {
   private void createTable() {
     tableModel = new QuestionTableModel(QuestionService.getQuestions());
     tableQuestions = new JTable(tableModel);
-    tableQuestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// uma linha de cada vez
-
+    tableQuestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     tableQuestions.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent event) {
@@ -66,10 +67,13 @@ public class QuestionTablePanel extends JPanel {
 
   private void createBtns() {
     JPanel panelBtn = new JPanel();
+    panelBtn.setBackground(new Color(118, 206, 166));
     FlowLayout layout = (FlowLayout) panelBtn.getLayout();
     layout.setAlignment(FlowLayout.RIGHT);
 
     btnInit = new JButton("Inicio");
+    btnInit.setForeground(new Color(255, 255, 255));
+    btnInit.setBackground(new Color(4, 141, 95));
 
     btnInit.addActionListener(new ActionListener() {
       @Override
@@ -81,6 +85,8 @@ public class QuestionTablePanel extends JPanel {
     panelBtn.add(btnInit);
 
     btnCreate = new JButton("Adicionar");
+    btnCreate.setForeground(new Color(255, 255, 255));
+    btnCreate.setBackground(new Color(4, 141, 95));
 
     btnCreate.addActionListener(new ActionListener() {
       @Override
@@ -92,6 +98,8 @@ public class QuestionTablePanel extends JPanel {
     panelBtn.add(btnCreate);
 
     btnChange = new JButton("Alterar");
+    btnChange.setForeground(new Color(255, 255, 255));
+    btnChange.setBackground(new Color(4, 141, 95));
 
     panelBtn.add(btnChange);
 
@@ -99,11 +107,14 @@ public class QuestionTablePanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent event) {
 
-        if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
-          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_OBJECTIVE);
+        if (tableModel.getQuestion(tableQuestions.getSelectedRow()).getTypeQuestion()
+            .equals(TypeQuestion.OBJECTIVE)) {
+          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()),
+              MainFrame.INDEX_OBJECTIVE);
 
         } else {
-          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()), MainFrame.INDEX_DISCURSIVE);
+          frame.showForm(tableModel.getQuestion(tableQuestions.getSelectedRow()),
+              MainFrame.INDEX_DISCURSIVE);
         }
       }
     });
@@ -112,12 +123,16 @@ public class QuestionTablePanel extends JPanel {
 
     btnRemove = new JButton("Remover");
 
+    btnRemove.setForeground(new Color(255, 255, 255));
+    btnRemove.setBackground(new Color(4, 141, 95));
+
     btnRemove.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         Question quest = tableModel.getQuestion(tableQuestions.getSelectedRow());
-        int answer = JOptionPane.showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
-            "The Game", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int answer = JOptionPane
+            .showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
+                MainFrame.TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
           QuestionService.deleteQuestion(quest);
           tableModel.delete(quest);

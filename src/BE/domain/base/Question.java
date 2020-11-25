@@ -35,7 +35,7 @@ public abstract class Question {
   }
 
   public void setTypeQuestion(String typeQuestion) {
-    if(typeQuestion.equals("DISCURSIVE")) {
+    if (typeQuestion.equals("DISCURSIVE")) {
       setTypeQuestion(TypeQuestion.DISCURSIVE);
     } else if (typeQuestion.equals("OBJECTIVE")) {
       setTypeQuestion(TypeQuestion.OBJECTIVE);

@@ -1,6 +1,5 @@
-import javax.swing.SwingUtilities;
-
 import FE.MainFrame;
+import javax.swing.SwingUtilities;
 
 public class TheGame {
 
@@ -13,6 +12,6 @@ public class TheGame {
         frame.draw();
       }
     });
-    
+
   }
 }

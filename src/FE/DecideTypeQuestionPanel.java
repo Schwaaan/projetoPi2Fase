@@ -14,17 +14,12 @@ import javax.swing.JPanel;
 public class DecideTypeQuestionPanel extends JPanel {
 
   private MainFrame frame;
-  // private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
   public DecideTypeQuestionPanel(MainFrame mainFrame) {
     this.frame = mainFrame;
     setMinimumSize(new Dimension(1200, 800));
     init();
   }
-
-  // public void setArrayFormQuestionPanel() {
-  //   this.formQuestionPanels = mainFrame.getFormQuestionPanels();
-  // }
 
   private void init() {
 
@@ -36,23 +31,23 @@ public class DecideTypeQuestionPanel extends JPanel {
     JButton btnReadQuestions;
 
     panel = new JPanel();
-    panel.setBackground(new Color(0, 238, 224));
+    panel.setBackground(new Color(118, 206, 166));
     panel.setPreferredSize(new Dimension(200, 150));
     add(panel, BorderLayout.NORTH);
 
     panel = new JPanel();
-    panel.setBackground(new Color(0, 238, 224));
+    panel.setBackground(new Color(118, 206, 166));
     panel.setPreferredSize(new Dimension(200, 150));
     add(panel, BorderLayout.SOUTH);
 
     panel = new JPanel();
-    panel.setBackground(new Color(0, 238, 224));
+    panel.setBackground(new Color(118, 206, 166));
     panel.setPreferredSize(new Dimension(350, 100));
     panel.setLayout(new FlowLayout());
 
     add(panel, BorderLayout.WEST);
     panel = new JPanel();
-    panel.setBackground(new Color(0, 238, 224));
+    panel.setBackground(new Color(118, 206, 166));
     panel.setPreferredSize(new Dimension(250, 100));
     panel.setLayout(new FlowLayout());
     add(panel, BorderLayout.EAST);
@@ -60,40 +55,35 @@ public class DecideTypeQuestionPanel extends JPanel {
     panelbt = new JPanel();
     panel.setPreferredSize(new Dimension(350, 40));
     panelbt.setLayout(new GridLayout(4, 1, 5, 10));
-    panelbt.setBackground(new Color(0, 238, 224));
+    panelbt.setBackground(new Color(118, 206, 166));
 
-    btnCreaterQuestions = new JButton("Questão discursiva");
+    btnCreaterQuestions = new JButton("Questão Discursiva");
     btnCreaterQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        // FormQuestionPanel form = new FormDicursiveQuestionPanel(mainFrame);
-        // FormQuestionPanel[] forms = mainFrame.getFormQuestionPanels();
         frame.showForm(null, MainFrame.INDEX_DISCURSIVE);
       }
     });
-    btnCreaterQuestions.setFont(new Font("TimesRoman", 1, 24));
-    btnCreaterQuestions.setForeground(new Color(5, 255, 90));
+    btnCreaterQuestions.setFont(new Font("Comic Neue", 1, 24));
+    btnCreaterQuestions.setForeground(new Color(255, 255, 255));
+    btnCreaterQuestions.setBackground(new Color(4, 141, 95));
     btnCreaterQuestions.setRolloverEnabled(false);
     panelbt.add(btnCreaterQuestions);
 
-    btnReadQuestions = new JButton("Questão objetiva");
+    btnReadQuestions = new JButton("Questão Objetiva");
     btnReadQuestions.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getActionCommand().equals("Questão objetiva")) {
-          // FormQuestionPanel form = new FormObjectiveQuestionPanel(mainFrame);
-          // FormQuestionPanel[] forms = mainFrame.getFormQuestionPanels();
+        if (actionEvent.getActionCommand().equals("Questão Objetiva")) {
           frame.showForm(null, MainFrame.INDEX_OBJECTIVE);
         }
       }
     });
-    btnReadQuestions.setFont(new Font("TimesRoman", 1, 24));
-    btnReadQuestions.setForeground(new Color(5, 255, 90));
+    btnReadQuestions.setFont(new Font("Comic Neue", 1, 24));
+    btnReadQuestions.setForeground(new Color(4, 141, 95));
     btnReadQuestions.setBackground(Color.WHITE);
     btnReadQuestions.setRolloverEnabled(false);
     panelbt.add(btnReadQuestions);
-
     add(panelbt, BorderLayout.CENTER);
-
   }
 }
