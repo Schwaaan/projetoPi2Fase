@@ -1,8 +1,8 @@
-package BE.domain;
+package be.domain;
 
-import BE.domain.base.Question;
-import BE.domain.base.TypeQuestion;
-import BE.services.QuestionService;
+import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
+import be.services.QuestionService;
 import java.util.List;
 
 public class ObjectiveQuestion extends Question {

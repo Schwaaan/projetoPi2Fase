@@ -1,4 +1,4 @@
-package BE.domain.base;
+package be.domain.base;
 
 public abstract class Question {
 
@@ -35,7 +35,7 @@ public abstract class Question {
   }
 
   public void setTypeQuestion(String typeQuestion) {
-    if(typeQuestion.equals("DISCURSIVE")) {
+    if (typeQuestion.equals("DISCURSIVE")) {
       setTypeQuestion(TypeQuestion.DISCURSIVE);
     } else if (typeQuestion.equals("OBJECTIVE")) {
       setTypeQuestion(TypeQuestion.OBJECTIVE);
@@ -47,15 +47,12 @@ public abstract class Question {
     if (this == obj) {
       return true;
     }
-
     if (obj == null) {
       return false;
     }
-
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-
     Question question = (Question) obj;
     return this.id == question.id;
   }

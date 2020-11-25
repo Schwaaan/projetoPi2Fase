@@ -1,4 +1,4 @@
-package BE.utils;
+package be.utils;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;

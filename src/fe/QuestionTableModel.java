@@ -1,15 +1,12 @@
-package FE;
+package fe;
 
-import BE.domain.base.Question;
-
-import BE.domain.base.TypeQuestion;
+import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 
 public class QuestionTableModel extends AbstractTableModel {
-
 
   private List<Question> questions = new ArrayList<>();
   private String[] columns = new String[]{"Id", "Questão", "Tipo"};
@@ -21,11 +18,9 @@ public class QuestionTableModel extends AbstractTableModel {
   @Override
   public String getColumnName(int column) {
     String columnName = null;
-
     if (column >= 0 && column <= columns.length) {
       columnName = columns[column];
     }
-
     return columnName;
   }
 
@@ -39,15 +34,11 @@ public class QuestionTableModel extends AbstractTableModel {
     return columns.length;
   }
 
-
-  // implementado apenzas porque é obrigatório, mas não iremos usar por enquanto
   @Override
   public Object getValueAt(int rowIndex, int colIndex) {
     String value = null;
-
     if (rowIndex >= 0 && rowIndex <= questions.size()) {
       Question question = questions.get(rowIndex);
-
       switch (colIndex) {
         case 0:
           value = Integer.toString(question.getId());
@@ -61,7 +52,7 @@ public class QuestionTableModel extends AbstractTableModel {
           } else {
             value = "Objetiva";
           }
-          break; // acho que o problema era com o break - ele estava dentro do if e do else e não deixava terminar o bloco
+          break;
         default:
           System.err.printf("[ERRO] Índice de coluna inválido: %d\n", colIndex);
           break;

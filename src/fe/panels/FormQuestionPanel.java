@@ -1,6 +1,8 @@
-package FE;
+package fe.panels;
 
-import BE.domain.base.Question;
+import be.domain.base.Question;
+import fe.MainFrame;
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -33,12 +35,12 @@ public abstract class FormQuestionPanel extends JPanel {
     setLayout(layout);
     createForm();
     createButtons();
+    setBackground(new Color(118, 206, 166));
   }
 
   public JTextField getIdTxt() {
     return idTxt;
   }
-
 
   private void createForm() {
     JLabel label;
@@ -62,16 +64,15 @@ public abstract class FormQuestionPanel extends JPanel {
 
   private void createButtons() {
     JPanel btnPanel = new JPanel();
+    btnPanel.setBackground(new Color(118, 206, 166));
 
     createSaveButton();
-
-    System.out.println(saveBtn);
-
+    saveBtn.setForeground(new Color(255, 255, 255));
+    saveBtn.setBackground(new Color(4, 141, 95));
     btnPanel.add(saveBtn);
 
     createCancelButton();
     btnPanel.add(cancelBtn);
-
     addComponent(btnPanel, 11, 1);
   }
 
@@ -79,6 +80,8 @@ public abstract class FormQuestionPanel extends JPanel {
 
   private void createCancelButton() {
     cancelBtn = new JButton("Cancelar");
+    cancelBtn.setForeground(new Color(255, 255, 255));
+    cancelBtn.setBackground(new Color(4, 141, 95));
     cancelBtn.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {

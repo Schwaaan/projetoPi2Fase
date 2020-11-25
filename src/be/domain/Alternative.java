@@ -1,4 +1,4 @@
-package BE.domain;
+package be.domain;
 
 public class Alternative {
 
@@ -29,6 +29,6 @@ public class Alternative {
   @Override
   public String toString() {
     return String.format("%s: '%s'\n",
-          getClass().getName(), getAlternative());
+        getClass().getName(), getAlternative());
   }
 }
