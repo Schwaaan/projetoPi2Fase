@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DataBase  {
 
-  private static String URL = "jdbc:postgresql://localhost:5432/xxx";
+  private static String URL = "jdbc:postgresql://localhost:5432/poo-t2";
   private static String USER = "postgres";
   private static String PSWORD = "123";
 

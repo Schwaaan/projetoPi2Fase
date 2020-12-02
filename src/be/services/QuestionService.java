@@ -4,6 +4,7 @@ import be.domain.Alternative;
 import be.domain.DiscursiveQuestion;
 import be.domain.ObjectiveQuestion;
 import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
 import be.repository.DataBase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +52,7 @@ public class QuestionService {
 
   public static Alternative createAlternative(Alternative alternative, Integer questionId)
       throws SQLException {
-    final String query = "Insert into alternative(id_question,alternative,rightalternative,deleted) VALUES (?,?,?,?)";
+    final String query = "Insert into alternative(id_question,alternative,rigth_alternative,deleted) VALUES (?,?,?,?)";
 
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -72,7 +73,6 @@ public class QuestionService {
         alternative.setId(resultSet.getInt(1)); // nao sei o q faz.
       }
 
-
       preparedStatement.execute();
 
     } catch (SQLException e) {
@@ -84,7 +84,7 @@ public class QuestionService {
   }
 
   public static Question insertQuestionDiscursive(DiscursiveQuestion question) {
-    final String query = "Insert into question(question,idTeacher,deleted) VALUES (?,?,?)";
+    final String query = "Insert into question(question,type_question,deleted) VALUES (?,?,?)";
 
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -94,7 +94,7 @@ public class QuestionService {
 
       preparedStatement = connection.prepareStatement(query);
       preparedStatement.setString(1, question.getQuestion());
-      preparedStatement.setInt(2, question.getIdTeacher());
+      preparedStatement.setString(2, "Discursive");
       preparedStatement.setBoolean(3, question.isDeleted());
 
       preparedStatement.execute();
