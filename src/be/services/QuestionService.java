@@ -99,7 +99,7 @@ public class QuestionService {
           question.setQuestion(resultSet.getString("question"));
           question.setAlternativeList(AlternativeService.getListAlternativeById(question.getId()));
           question.setDeleted(resultSet.getBoolean("deleted"));
-          
+
           questions.add(question);
         } else {
           Question question = new DiscursiveQuestion();
@@ -118,7 +118,7 @@ public class QuestionService {
         if (resultSet != null) {
           resultSet.close();
         }
-        
+
         if (statement != null) {
           statement.close();
         }
@@ -126,20 +126,105 @@ public class QuestionService {
         e.printStackTrace();
       }
     }
-
     return questions;
   }
 
-  
   public static void updateQuestion(Question question) {
-    // int index = questions.indexOf(question);
-    // if (index >= 0) {
-      //   questions.set(index, question);
-      // }
-    }
-    
-    public static void deleteQuestion(Question question) {
-      // questions.removeIf(x -> x.getId().equals(question.getId()));
-      // System.out.println("Questão removida , Id = " + question.getId());
+    final String queryUpdate = "UPDATE question SET type_question = ? question = ? deleted = ?  where id = ?";
+
+    final String query2 = "DELETE FROM alternative WHERE id_question = ?";
+
+    final String query3 = "INSERT INTO alternative (id_question, alternative, rigth_alternative, deleted) VALUES (?, ?, ?, ?)";
+
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+
+    try {
+
+      connection = ConnectionDataBase.getConnection();
+      statement = connection.prepareStatement(queryUpdate);
+      statement.setString(1, question.getTypeQuestion().toString());
+      statement.setString(2, question.getQuestion());
+      statement.setBoolean(3, question.isDeleted());
+      statement.setInt(4, question.getId());
+      resultSet = statement.getGeneratedKeys();
+      statement.execute();
+      statement.close();
+
+      statement = connection.prepareStatement(query2);
+      statement.setInt(1, question.getId());
+      resultSet = statement.getGeneratedKeys();
+      statement.execute();
+      statement.close();
+
+      if (question.getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
+        statement = connection.prepareStatement(query3);
+        ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
+        statement.setInt(1, objectiveQuestion.getId());
+        for (Alternative alternative : objectiveQuestion.getAlternativeList()) {
+          statement.setString(2, alternative.getAlternative());
+          statement.setBoolean(3, alternative.getRigthAlternative());
+          statement.setBoolean(4, alternative.isDeleted());
+        }
+        statement.execute();
+        statement.close();
+      }
+      connection.close();
+    } catch (Exception e) {
+      System.out.println(e.toString());
+    } finally {
+      try {
+        if (resultSet != null) {
+          resultSet.close();
+        }
+        if (statement != null) {
+          statement.close();
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
   }
+
+ /* public static void deleteQuestion(Question question) {
+
+    final String query1 = "DELETE FROM alternative WHERE id_question = ?";
+    final String query2 = "DELETE FROM question WHERE id = ?";
+
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+
+    try {
+      connection = ConnectionDataBase.getConnection();
+      statement = connection.prepareStatement(query1);
+      statement.setInt(1, question.getId());
+      resultSet = statement.getGeneratedKeys();
+      statement.execute();
+      statement.close();
+
+      if(question.getTypeQuestion().equals(TypeQuestion.OBJECTIVE)){
+        statement = connection.prepareStatement(query1);
+        statement.setInt(1, question.getId());
+        resultSet = statement.getGeneratedKeys();
+        statement.execute();
+        statement.close();
+      }
+      connection.close();
+    } catch (Exception e) {
+      System.out.println(e.toString());
+    } finally {
+      try {
+        if (resultSet != null) {
+          resultSet.close();
+        }
+        if (statement != null) {
+          statement.close();
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }*/
+}
