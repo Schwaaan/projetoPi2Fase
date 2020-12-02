@@ -10,14 +10,14 @@ public class ObjectiveQuestion extends Question {
   private List<Alternative> alternativeList;
 
   public ObjectiveQuestion(String question, List<Alternative> listAlternatives) {
-    super(question);
+    super(question, null,false);
     this.alternativeList = listAlternatives;
   }
 
   @Override
   public String createQuestion() {
     this.setTypeQuestion(TypeQuestion.OBJECTIVE);
-    QuestionService.createQuestion(this);
+   // QuestionService.createQuestion(this);
     System.out.println("Questão objetiva criada com sucesso!");
     return "Questão criada com sucesso";
   }

@@ -42,11 +42,12 @@ public class QuestionTablePanel extends JPanel {
   }
 
   public void reload() {
-    tableModel.load(QuestionService.getQuestions());
+
+    //tableModel.load(QuestionService.getQuestions());
   }
 
   private void createTable() {
-    tableModel = new QuestionTableModel(QuestionService.getQuestions());
+    //tableModel = new QuestionTableModel(QuestionService.getQuestions());
     tableQuestions = new JTable(tableModel);
     tableQuestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     tableQuestions.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -136,7 +137,7 @@ public class QuestionTablePanel extends JPanel {
             .showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
                 MainFrame.TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
-          QuestionService.deleteQuestion(quest);
+         // QuestionService.deleteQuestion(quest);
           tableModel.delete(quest);
         }
       }

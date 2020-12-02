@@ -79,7 +79,7 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
           } else {
             quest.setId(Integer.parseInt(getIdTxt().getText()));
             quest.setTypeQuestion(typeQuestionTxt.getText());
-            QuestionService.updateQuestion(quest);
+            //QuestionService.updateQuestion(quest);
             JOptionPane
                 .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão Alterada com sucesso!",
                     MainFrame.TITLE,

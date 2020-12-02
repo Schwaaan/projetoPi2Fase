@@ -6,14 +6,18 @@ import be.services.QuestionService;
 
 public class DiscursiveQuestion extends Question {
 
-  public DiscursiveQuestion(String question) {
-    super(question);
+  public DiscursiveQuestion(String question,Integer idTeacher,boolean deleted) {
+    super(question,idTeacher,deleted);
+  }
+
+  public DiscursiveQuestion(String text) {
+    super(text);
   }
 
   @Override
   public String createQuestion() {
     this.setTypeQuestion(TypeQuestion.DISCURSIVE);
-    QuestionService.createQuestion(this);
+   // QuestionService.createQuestion(this);
     System.out.println("Questão discursiva criada com sucesso!");
     return "Questão discursiva criada com sucesso!";
   }

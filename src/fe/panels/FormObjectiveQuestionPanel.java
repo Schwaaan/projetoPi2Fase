@@ -168,7 +168,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           } else {
             quest.setId(question.getId());
             quest.setTypeQuestion(typeQuestionTxt.getText());
-            QuestionService.updateQuestion(quest);
+            //QuestionService.updateQuestion(quest);
             JOptionPane
                 .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!",
                     MainFrame.TITLE,

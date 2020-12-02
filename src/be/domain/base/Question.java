@@ -5,9 +5,33 @@ public abstract class Question {
   private Integer id;
   private TypeQuestion typeQuestion;
   private String question;
+  private Integer idTeacher;
+  private boolean deleted;
 
   public Question(String question) {
     this.question = question;
+  }
+
+  public Question(String question, Integer idTeacher, boolean deleted) {
+    this.question = question;
+    this.idTeacher = idTeacher;
+    this.deleted = deleted;
+  }
+
+  public boolean isDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(boolean deleted) {
+    this.deleted = deleted;
+  }
+
+  public Integer getIdTeacher() {
+    return idTeacher;
+  }
+
+  public void setIdTeacher(Integer idTeacher) {
+    this.idTeacher = idTeacher;
   }
 
   public String getQuestion() {
