@@ -68,7 +68,9 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         if (validateTxtArea()) {
-          Question quest = new DiscursiveQuestion(getQuestionTxt().getText());
+          Question quest = new DiscursiveQuestion();
+          quest.setQuestion(getQuestionTxt().getText());
+          
           if (question == null) {
             quest.createQuestion();
             JOptionPane

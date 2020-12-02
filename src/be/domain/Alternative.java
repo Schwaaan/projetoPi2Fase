@@ -3,11 +3,29 @@ package be.domain;
 public class Alternative {
 
   private String alternative;
+  private int idQuestion;
   private boolean rightAlternative;
+  private boolean isDeleted;
 
   public Alternative(String text, boolean isTrue) {
     this.alternative = text;
     this.rightAlternative = isTrue;
+  }
+
+  public int getIdQuestion() {
+    return idQuestion;
+  }
+
+  public void setIdQuestion(int idQuestion) {
+    this.idQuestion = idQuestion;
+  }
+
+  public boolean isDeleted() {
+    return isDeleted;
+  }
+
+  public void setDeleted(boolean isDeleted) {
+    this.isDeleted = isDeleted;
   }
 
   public void setAlternative(String alternative) {
