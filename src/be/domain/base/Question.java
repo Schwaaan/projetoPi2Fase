@@ -1,13 +1,23 @@
 package be.domain.base;
 
+import java.util.List;
+import java.util.Locale;
+
+import be.domain.Alternative;
+
 public abstract class Question {
 
   private Integer id;
   private TypeQuestion typeQuestion;
   private String question;
+  private boolean isDeleted;
 
-  public Question(String question) {
-    this.question = question;
+  public boolean isDeleted() {
+    return isDeleted;
+  }
+
+  public void setDeleted(boolean isDeleted) {
+    this.isDeleted = isDeleted;
   }
 
   public String getQuestion() {
@@ -34,10 +44,12 @@ public abstract class Question {
     this.typeQuestion = typeQuestion;
   }
 
-  public void setTypeQuestion(String typeQuestion) {
-    if (typeQuestion.equals("DISCURSIVE")) {
+  public void setTypeQuestion(String type) {
+    String typeQuestion = type.toUpperCase(new Locale(type));
+
+    if (typeQuestion.equals("DISCURSIVA")) {
       setTypeQuestion(TypeQuestion.DISCURSIVE);
-    } else if (typeQuestion.equals("OBJECTIVE")) {
+    } else if (typeQuestion.equals("OBJETIVA")) {
       setTypeQuestion(TypeQuestion.OBJECTIVE);
     }
   }
@@ -58,5 +70,8 @@ public abstract class Question {
   }
 
   public abstract String createQuestion();
+
+public void setAlternativeList(List<Alternative> alternativeList) {}
+
 }
 

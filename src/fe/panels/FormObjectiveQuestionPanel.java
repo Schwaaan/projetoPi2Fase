@@ -156,7 +156,9 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
 
           System.out.println(alternativeList.get(0).getRigthAlternative());
 
-          Question quest = new ObjectiveQuestion(getQuestionTxt().getText(), alternativeList);
+          Question quest = new ObjectiveQuestion();
+          quest.setQuestion(getQuestionTxt().getText());
+          quest.setAlternativeList(alternativeList);
 
           if (Objects.isNull(getQuestion())) {
             quest.createQuestion();
