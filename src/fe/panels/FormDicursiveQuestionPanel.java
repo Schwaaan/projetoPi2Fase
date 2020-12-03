@@ -72,24 +72,47 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
           Question quest = new DiscursiveQuestion();
           quest.setQuestion(getQuestionTxt().getText());
           quest.setTypeQuestion(TypeQuestion.DISCURSIVE);
-          
+
           if (question == null) {
-            quest.createQuestion();
+            boolean create = quest.createQuestion();
+            if (create) {
+              JOptionPane
+                  .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão criado com sucesso!",
+                      MainFrame.TITLE,
+                      JOptionPane.INFORMATION_MESSAGE);
+              getFrame().showQuestionPanel();
+              return;
+            }
             JOptionPane
-                .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão criado com sucesso!",
+                .showMessageDialog(FormDicursiveQuestionPanel.this,
+                    "Não foi possivel criar sua questão =(, por favor"
+                        + "entre em contato com o suporte ^^",
                     MainFrame.TITLE,
                     JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
+            return;
           } else {
             quest.setId(Integer.parseInt(getIdTxt().getText()));
             quest.setTypeQuestion(typeQuestionTxt.getText());
-            QuestionService.updateQuestion(quest);
-            JOptionPane
-                .showMessageDialog(FormDicursiveQuestionPanel.this, "Questão Alterada com sucesso!",
-                    MainFrame.TITLE,
-                    JOptionPane.INFORMATION_MESSAGE);
-            getFrame().showQuestionPanel();
+            boolean update = QuestionService.updateQuestion(quest);
 
+            if (!update) {
+              JOptionPane
+                  .showMessageDialog(FormDicursiveQuestionPanel.this,
+                      "Não foi possivel alterar sua questão,"
+                          + "Por favor entre em contato com o suporte.",
+                      MainFrame.TITLE,
+                      JOptionPane.INFORMATION_MESSAGE);
+              getFrame().showQuestionPanel();
+              return;
+            }
+
+              JOptionPane
+                  .showMessageDialog(FormDicursiveQuestionPanel.this,
+                      "Questão Alterada com sucesso!",
+                      MainFrame.TITLE,
+                      JOptionPane.INFORMATION_MESSAGE);
+              getFrame().showQuestionPanel();
           }
         } else {
           JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Preencha todos os campos",

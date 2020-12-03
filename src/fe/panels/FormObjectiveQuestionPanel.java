@@ -163,16 +163,37 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           quest.setAlternativeList(alternativeList);
 
           if (Objects.isNull(getQuestion())) {
-            quest.createQuestion();
+            boolean create = quest.createQuestion();
+            if (create) {
+              JOptionPane
+                  .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!",
+                      MainFrame.TITLE,
+                      JOptionPane.INFORMATION_MESSAGE);
+              getFrame().showQuestionPanel();
+              return;
+            }
             JOptionPane
-                .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão criado com sucesso!",
+                .showMessageDialog(FormObjectiveQuestionPanel.this,
+                    "Não foi possivel criar sua questão =( por"
+                        + "favor entre em contato com o suporte!",
                     MainFrame.TITLE,
                     JOptionPane.INFORMATION_MESSAGE);
             getFrame().showQuestionPanel();
+            return;
           } else {
             quest.setId(question.getId());
             quest.setTypeQuestion(typeQuestionTxt.getText());
-            QuestionService.updateQuestion(quest);
+            boolean update = QuestionService.updateQuestion(quest);
+            if (!update) {
+              JOptionPane
+                  .showMessageDialog(FormObjectiveQuestionPanel.this,
+                      "Não foi possivel alterar sua questão,"
+                          + "Por favor entre em contato com o suporte.",
+                      MainFrame.TITLE,
+                      JOptionPane.INFORMATION_MESSAGE);
+              getFrame().showQuestionPanel();
+              return;
+            }
             JOptionPane
                 .showMessageDialog(FormObjectiveQuestionPanel.this, "Questão Alterada com sucesso!",
                     MainFrame.TITLE,
