@@ -29,13 +29,7 @@ public class QuestionService {
       connection = ConnectionDataBase.getConnection();
       statement = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
 
-      if (question instanceof ObjectiveQuestion) {
-        ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
-        statement.setString(1, objectiveQuestion.getTypeQuestion().getType());
-      } else if (question instanceof DiscursiveQuestion) {
-        DiscursiveQuestion discursiveQuestion = (DiscursiveQuestion) question;
-        statement.setString(1, discursiveQuestion.getTypeQuestion().getType());
-      }
+      statement.setString(1, question.getTypeQuestion().getType());
       statement.setString(2, question.getQuestion());
       statement.setBoolean(3, question.isDeleted());
       statement.execute();
@@ -138,7 +132,6 @@ public class QuestionService {
 
     Connection connection = null;
     PreparedStatement statement = null;
-    ResultSet resultSet = null;
 
     try {
 
@@ -148,15 +141,16 @@ public class QuestionService {
       statement.setString(2, question.getQuestion());
       statement.setBoolean(3, question.isDeleted());
       statement.setInt(4, question.getId());
-      resultSet = statement.getGeneratedKeys();
       statement.execute();
+      statement.close();
+      
 
       statement = connection.prepareStatement(query2);
       statement.setInt(1, question.getId());
-      resultSet = statement.getGeneratedKeys();
       statement.execute();
+      statement.close();
 
-      if (question.getTypeQuestion().getType().equals(TypeQuestion.OBJECTIVE.getType())) {
+      if (question instanceof ObjectiveQuestion) {
         statement = connection.prepareStatement(query3);
         statement.setInt(1, question.getId());
         ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
@@ -165,16 +159,12 @@ public class QuestionService {
           statement.setBoolean(3, alternative.getRigthAlternative());
           statement.setBoolean(4, alternative.isDeleted());
           statement.execute();
-        }
-        statement.close();
+        }        
       }
     } catch (Exception e) {
       System.out.println(e.toString());
     } finally {
       try {
-        if (resultSet != null) {
-          resultSet.close();
-        }
         if (statement != null) {
           statement.close();
         }
@@ -191,7 +181,6 @@ public class QuestionService {
 
     Connection connection = null;
     PreparedStatement statement = null;
-    ResultSet resultSet = null;
 
     try {
 
@@ -199,17 +188,15 @@ public class QuestionService {
       connection = ConnectionDataBase.getConnection();
 
 
-      if(question.getTypeQuestion().equals(TypeQuestion.OBJECTIVE)){
+      if(question instanceof ObjectiveQuestion){
         statement = connection.prepareStatement(query1);
         statement.setInt(1, question.getId());
-        resultSet = statement.getGeneratedKeys();
         statement.execute();
         statement.close();
       }
 
       statement = connection.prepareStatement(query2);
       statement.setInt(1, question.getId());
-      resultSet = statement.getGeneratedKeys();
       statement.execute();
       statement.close();
 
@@ -218,9 +205,6 @@ public class QuestionService {
       System.out.println(e.toString());
     } finally {
       try {
-        if (resultSet != null) {
-          resultSet.close();
-        }
         if (statement != null) {
           statement.close();
         }

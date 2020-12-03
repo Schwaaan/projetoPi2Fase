@@ -63,7 +63,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
           ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
 
           getIdTxt().setText(Integer.toString(question.getId()));
-          typeQuestionTxt.setText(String.valueOf(objectiveQuestion.getTypeQuestion()));
+          typeQuestionTxt.setText(objectiveQuestion.getTypeQuestion().getType());
           getQuestionTxt().setText(objectiveQuestion.getQuestion());
 
           textFieldA.setText(objectiveQuestion.getAlternativeList().get(0).getAlternative());
