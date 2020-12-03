@@ -47,13 +47,14 @@ public class QuestionTableModel extends AbstractTableModel {
           value = question.getQuestion();
           break;
         case 2:
-          if (question.getTypeQuestion().equals(TypeQuestion.DISCURSIVE)) {
+          if (question.getTypeQuestion().getType().equals(TypeQuestion.DISCURSIVE.getType())) {
             value = "Discursiva";
           } else {
             value = "Objetiva";
           }
           break;
         default:
+          value = "default";
           System.err.printf("[ERRO] Índice de coluna inválido: %d\n", colIndex);
           break;
       }

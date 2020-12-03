@@ -136,7 +136,7 @@ public class QuestionTablePanel extends JPanel {
             .showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
                 MainFrame.TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
-          //QuestionService.deleteQuestion(quest);
+          QuestionService.deleteQuestion(quest);
           tableModel.delete(quest);
         }
       }

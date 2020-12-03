@@ -79,7 +79,7 @@ public class QuestionService {
   public static List<Question> getQuestions() {
     List<Question> questions = new ArrayList<>();
 
-    final String query = "SELECT * FROM question";
+    final String query = "SELECT * FROM question ORDER BY id";
 
     Connection connection = null;
     Statement statement = null;
@@ -130,11 +130,11 @@ public class QuestionService {
   }
 
   public static void updateQuestion(Question question) {
-    final String queryUpdate = "UPDATE question SET type_question = ? question = ? deleted = ?  where id = ?";
+    final String queryUpdate = "UPDATE question SET type_question = ?, question = ?, deleted = ?  where id = ?";
 
     final String query2 = "DELETE FROM alternative WHERE id_question = ?";
 
-    final String query3 = "INSERT INTO alternative (id_question, alternative, rigth_alternative, deleted) VALUES (?, ?, ?, ?)";
+    final String query3 = "INSERT INTO alternative(id_question, alternative, rigth_alternative, deleted) VALUES (?, ?, ?, ?)";
 
     Connection connection = null;
     PreparedStatement statement = null;
@@ -144,33 +144,30 @@ public class QuestionService {
 
       connection = ConnectionDataBase.getConnection();
       statement = connection.prepareStatement(queryUpdate);
-      statement.setString(1, question.getTypeQuestion().toString());
+      statement.setString(1, question.getTypeQuestion().getType());
       statement.setString(2, question.getQuestion());
       statement.setBoolean(3, question.isDeleted());
       statement.setInt(4, question.getId());
       resultSet = statement.getGeneratedKeys();
       statement.execute();
-      statement.close();
 
       statement = connection.prepareStatement(query2);
       statement.setInt(1, question.getId());
       resultSet = statement.getGeneratedKeys();
       statement.execute();
-      statement.close();
 
-      if (question.getTypeQuestion().equals(TypeQuestion.OBJECTIVE)) {
+      if (question.getTypeQuestion().getType().equals(TypeQuestion.OBJECTIVE.getType())) {
         statement = connection.prepareStatement(query3);
+        statement.setInt(1, question.getId());
         ObjectiveQuestion objectiveQuestion = (ObjectiveQuestion) question;
-        statement.setInt(1, objectiveQuestion.getId());
         for (Alternative alternative : objectiveQuestion.getAlternativeList()) {
           statement.setString(2, alternative.getAlternative());
           statement.setBoolean(3, alternative.getRigthAlternative());
           statement.setBoolean(4, alternative.isDeleted());
+          statement.execute();
         }
-        statement.execute();
         statement.close();
       }
-      connection.close();
     } catch (Exception e) {
       System.out.println(e.toString());
     } finally {
@@ -187,7 +184,7 @@ public class QuestionService {
     }
   }
 
- /* public static void deleteQuestion(Question question) {
+ public static void deleteQuestion(Question question) {
 
     final String query1 = "DELETE FROM alternative WHERE id_question = ?";
     final String query2 = "DELETE FROM question WHERE id = ?";
@@ -197,12 +194,10 @@ public class QuestionService {
     ResultSet resultSet = null;
 
     try {
+
+
       connection = ConnectionDataBase.getConnection();
-      statement = connection.prepareStatement(query1);
-      statement.setInt(1, question.getId());
-      resultSet = statement.getGeneratedKeys();
-      statement.execute();
-      statement.close();
+
 
       if(question.getTypeQuestion().equals(TypeQuestion.OBJECTIVE)){
         statement = connection.prepareStatement(query1);
@@ -211,7 +206,14 @@ public class QuestionService {
         statement.execute();
         statement.close();
       }
-      connection.close();
+
+      statement = connection.prepareStatement(query2);
+      statement.setInt(1, question.getId());
+      resultSet = statement.getGeneratedKeys();
+      statement.execute();
+      statement.close();
+
+
     } catch (Exception e) {
       System.out.println(e.toString());
     } finally {
@@ -226,5 +228,5 @@ public class QuestionService {
         e.printStackTrace();
       }
     }
-  }*/
+  }
 }
