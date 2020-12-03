@@ -35,7 +35,7 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
           getQuestionTxt().setText("");
         } else {
           getIdTxt().setText(Integer.toString(question.getId()));
-          typeQuestionTxt.setText(String.valueOf(question.getTypeQuestion()));
+          typeQuestionTxt.setText(question.getTypeQuestion().getType());
           getQuestionTxt().setText(question.getQuestion());
         }
       }

@@ -47,11 +47,7 @@ public class QuestionTableModel extends AbstractTableModel {
           value = question.getQuestion();
           break;
         case 2:
-          if (question.getTypeQuestion().getType().equals(TypeQuestion.DISCURSIVE.getType())) {
-            value = "Discursiva";
-          } else {
-            value = "Objetiva";
-          }
+          value = question.getTypeQuestion().getType();
           break;
         default:
           value = "default";
