@@ -3,6 +3,7 @@ package fe.panels;
 import be.domain.Alternative;
 import be.domain.ObjectiveQuestion;
 import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
 import be.services.QuestionService;
 import be.utils.ValidateText;
 import be.utils.ValidateTextArea;
@@ -158,6 +159,7 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
 
           Question quest = new ObjectiveQuestion();
           quest.setQuestion(getQuestionTxt().getText());
+          quest.setTypeQuestion(TypeQuestion.OBJECTIVE);
           quest.setAlternativeList(alternativeList);
 
           if (Objects.isNull(getQuestion())) {

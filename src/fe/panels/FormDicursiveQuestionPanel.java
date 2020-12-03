@@ -2,6 +2,7 @@ package fe.panels;
 
 import be.domain.DiscursiveQuestion;
 import be.domain.base.Question;
+import be.domain.base.TypeQuestion;
 import be.services.QuestionService;
 import be.utils.ValidateTextArea;
 import be.utils.Validation;
@@ -70,6 +71,7 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
         if (validateTxtArea()) {
           Question quest = new DiscursiveQuestion();
           quest.setQuestion(getQuestionTxt().getText());
+          quest.setTypeQuestion(TypeQuestion.DISCURSIVE);
           
           if (question == null) {
             quest.createQuestion();
