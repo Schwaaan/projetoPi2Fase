@@ -181,7 +181,6 @@ public class QuestionService {
   }
 
   public static boolean deleteQuestion(Question question) {
-
     final String query1 = "DELETE FROM alternative WHERE id_question = ?";
     final String query2 = "DELETE FROM question WHERE id = ?";
 
@@ -189,7 +188,6 @@ public class QuestionService {
     PreparedStatement statement = null;
 
     try {
-
       connection = ConnectionDataBase.getConnection();
 
       if (question instanceof ObjectiveQuestion) {

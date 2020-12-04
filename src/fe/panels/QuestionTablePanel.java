@@ -44,17 +44,19 @@ public class QuestionTablePanel extends JPanel {
 
   public void reload() {
     List<Question> questionList = QuestionService.getQuestions();
-    if (questionList == null) {
-      JOptionPane
-          .showMessageDialog(this, "Não foi possivel recuperar as questões =(,"
-                  + "por favor entre em contato com o suporte ^^",
-              MainFrame.TITLE,
-              JOptionPane.INFORMATION_MESSAGE);
-
-      frame.showQuestionPanel();
+    if (questionList.size() > 0) {
+      tableModel.load(questionList);
       return;
     }
-    QuestionService.getQuestions();
+    JOptionPane
+        .showMessageDialog(this, "Não foi possivel recuperar as questões =(,"
+                + "por favor entre em contato com o suporte ^^",
+            MainFrame.TITLE,
+            JOptionPane.INFORMATION_MESSAGE);
+
+    frame.showQuestionPanel();
+    tableModel.load(questionList);
+    return;
   }
 
   private void createTable() {
