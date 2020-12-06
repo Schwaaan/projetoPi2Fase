@@ -44,16 +44,7 @@ public class QuestionTablePanel extends JPanel {
 
   public void reload() {
     List<Question> questionList = QuestionService.getQuestions();
-    if (questionList.size() > 0) {
       tableModel.load(questionList);
-      return;
-    }
-    tableModel.load(questionList);
-    JOptionPane
-        .showMessageDialog(this, "A lista de questões no momento encontra-se vazia.",
-            MainFrame.TITLE,
-            JOptionPane.INFORMATION_MESSAGE);
-    return;
   }
 
   private void createTable() {
