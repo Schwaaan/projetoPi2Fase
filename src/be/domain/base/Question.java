@@ -69,7 +69,7 @@ public abstract class Question {
     return this.id == question.id;
   }
 
-  public abstract String createQuestion();
+  public abstract boolean createQuestion();
 
 public void setAlternativeList(List<Alternative> alternativeList) {}
 

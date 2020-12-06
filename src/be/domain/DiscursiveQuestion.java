@@ -7,10 +7,10 @@ import be.services.QuestionService;
 public class DiscursiveQuestion extends Question {
 
   @Override
-  public String createQuestion() {
+  public boolean createQuestion() {
     this.setTypeQuestion(TypeQuestion.DISCURSIVE);
-    QuestionService.insert(this);
+    boolean create = QuestionService.insert(this);
     System.out.println("Questão discursiva criada com sucesso!");
-    return "Questão discursiva criada com sucesso!";
+    return create;
   }
 }

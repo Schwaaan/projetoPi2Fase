@@ -6,7 +6,7 @@ public enum TypeQuestion {
 
   private final String type;
 
-  private TypeQuestion(String type) {
+  TypeQuestion(String type) {
     this.type = type;
   }
 

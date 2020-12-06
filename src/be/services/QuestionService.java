@@ -17,7 +17,7 @@ import java.util.List;
 
 public class QuestionService {
 
-  public static void insert(Question question) {
+  public static boolean insert(Question question) {
     final String query1 = "INSERT INTO question (type_question, question, deleted) VALUES (?, ?, ?)";
     final String query2 = "INSERT INTO alternative (id_question, alternative, rigth_alternative, deleted) VALUES (?, ?, ?, ?)";
 
@@ -55,6 +55,7 @@ public class QuestionService {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+      return false;
     } finally {
       try {
         if (resultSet != null) {
@@ -66,8 +67,10 @@ public class QuestionService {
         }
       } catch (SQLException e) {
         e.printStackTrace();
+        return false;
       }
     }
+    return true;
   }
 
   public static List<Question> getQuestions() {
@@ -107,23 +110,24 @@ public class QuestionService {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+      return null;
     } finally {
       try {
         if (resultSet != null) {
           resultSet.close();
         }
-
         if (statement != null) {
           statement.close();
         }
       } catch (SQLException e) {
         e.printStackTrace();
+        return null;
       }
     }
     return questions;
   }
 
-  public static void updateQuestion(Question question) {
+  public static boolean updateQuestion(Question question) {
     final String queryUpdate = "UPDATE question SET type_question = ?, question = ?, deleted = ?  where id = ?";
 
     final String query2 = "DELETE FROM alternative WHERE id_question = ?";
@@ -143,7 +147,6 @@ public class QuestionService {
       statement.setInt(4, question.getId());
       statement.execute();
       statement.close();
-      
 
       statement = connection.prepareStatement(query2);
       statement.setInt(1, question.getId());
@@ -159,10 +162,11 @@ public class QuestionService {
           statement.setBoolean(3, alternative.getRigthAlternative());
           statement.setBoolean(4, alternative.isDeleted());
           statement.execute();
-        }        
+        }
       }
     } catch (Exception e) {
       System.out.println(e.toString());
+      return false;
     } finally {
       try {
         if (statement != null) {
@@ -170,12 +174,13 @@ public class QuestionService {
         }
       } catch (SQLException e) {
         e.printStackTrace();
+        return false;
       }
     }
+    return true;
   }
 
- public static void deleteQuestion(Question question) {
-
+  public static boolean deleteQuestion(Question question) {
     final String query1 = "DELETE FROM alternative WHERE id_question = ?";
     final String query2 = "DELETE FROM question WHERE id = ?";
 
@@ -183,12 +188,9 @@ public class QuestionService {
     PreparedStatement statement = null;
 
     try {
-
-
       connection = ConnectionDataBase.getConnection();
 
-
-      if(question instanceof ObjectiveQuestion){
+      if (question instanceof ObjectiveQuestion) {
         statement = connection.prepareStatement(query1);
         statement.setInt(1, question.getId());
         statement.execute();
@@ -200,9 +202,9 @@ public class QuestionService {
       statement.execute();
       statement.close();
 
-
     } catch (Exception e) {
       System.out.println(e.toString());
+      return false;
     } finally {
       try {
         if (statement != null) {
@@ -212,5 +214,6 @@ public class QuestionService {
         e.printStackTrace();
       }
     }
+    return true;
   }
 }

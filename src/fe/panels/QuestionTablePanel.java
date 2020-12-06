@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,7 +43,20 @@ public class QuestionTablePanel extends JPanel {
   }
 
   public void reload() {
-    tableModel.load(QuestionService.getQuestions());
+    List<Question> questionList = QuestionService.getQuestions();
+    if (questionList.size() > 0) {
+      tableModel.load(questionList);
+      return;
+    }
+    JOptionPane
+        .showMessageDialog(this, "Não foi possivel recuperar as questões =(,"
+                + "por favor entre em contato com o suporte ^^",
+            MainFrame.TITLE,
+            JOptionPane.INFORMATION_MESSAGE);
+
+    frame.showQuestionPanel();
+    tableModel.load(questionList);
+    return;
   }
 
   private void createTable() {
@@ -136,7 +150,17 @@ public class QuestionTablePanel extends JPanel {
             .showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
                 MainFrame.TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
-          QuestionService.deleteQuestion(quest);
+          boolean delete = QuestionService.deleteQuestion(quest);
+          if (!delete) {
+            JOptionPane
+                .showMessageDialog(QuestionTablePanel.this,
+                    "Não foi possivel remover essa questão,"
+                        + "Por favor entre em contato com o suporte.",
+                    MainFrame.TITLE,
+                    JOptionPane.INFORMATION_MESSAGE);
+            frame.showQuestionPanel();
+            return;
+          }
           tableModel.delete(quest);
         }
       }

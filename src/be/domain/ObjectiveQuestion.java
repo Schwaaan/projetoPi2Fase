@@ -10,11 +10,11 @@ public class ObjectiveQuestion extends Question {
   private List<Alternative> alternativeList;
 
   @Override
-  public String createQuestion() {
+  public boolean createQuestion() {
     this.setTypeQuestion(TypeQuestion.OBJECTIVE);
-    QuestionService.insert(this);
+    boolean create = QuestionService.insert(this);
     System.out.println("Questão objetiva criada com sucesso!");
-    return "Questão criada com sucesso";
+    return create;
   }
 
   public List<Alternative> getAlternativeList() {
