@@ -44,19 +44,7 @@ public class QuestionTablePanel extends JPanel {
 
   public void reload() {
     List<Question> questionList = QuestionService.getQuestions();
-    if (questionList.size() > 0) {
       tableModel.load(questionList);
-      return;
-    }
-    JOptionPane
-        .showMessageDialog(this, "Não foi possivel recuperar as questões =(,"
-                + "por favor entre em contato com o suporte ^^",
-            MainFrame.TITLE,
-            JOptionPane.INFORMATION_MESSAGE);
-
-    frame.showQuestionPanel();
-    tableModel.load(questionList);
-    return;
   }
 
   private void createTable() {
@@ -147,7 +135,7 @@ public class QuestionTablePanel extends JPanel {
       public void actionPerformed(ActionEvent arg0) {
         Question quest = tableModel.getQuestion(tableQuestions.getSelectedRow());
         int answer = JOptionPane
-            .showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa tarefa ?",
+            .showConfirmDialog(QuestionTablePanel.this, "Você deseja remover essa questão?",
                 MainFrame.TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer == JOptionPane.YES_OPTION) {
           boolean delete = QuestionService.deleteQuestion(quest);

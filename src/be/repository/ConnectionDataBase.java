@@ -8,7 +8,7 @@ public class ConnectionDataBase  {
 
   private static String URL = "jdbc:postgresql://localhost:5432/projeto_integrador";
   private static String USER = "postgres";
-  private static String PSWORD = "123";
+  private static String PSWORD = "ToNhOO0087";
 
   private static Connection connection;
 
