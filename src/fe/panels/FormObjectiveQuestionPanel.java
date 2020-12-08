@@ -231,4 +231,5 @@ public class FormObjectiveQuestionPanel extends FormQuestionPanel {
     boolean cIsValid = validator.validate(textFieldC);
     return aIsValid && bIsValid && cIsValid;
   }
+
 }

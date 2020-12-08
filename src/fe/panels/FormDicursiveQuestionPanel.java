@@ -107,12 +107,12 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
               return;
             }
 
-              JOptionPane
-                  .showMessageDialog(FormDicursiveQuestionPanel.this,
-                      "Questão Alterada com sucesso!",
-                      MainFrame.TITLE,
-                      JOptionPane.INFORMATION_MESSAGE);
-              getFrame().showQuestionPanel();
+            JOptionPane
+                .showMessageDialog(FormDicursiveQuestionPanel.this,
+                    "Questão Alterada com sucesso!",
+                    MainFrame.TITLE,
+                    JOptionPane.INFORMATION_MESSAGE);
+            getFrame().showQuestionPanel();
           }
         } else {
           JOptionPane.showMessageDialog(FormDicursiveQuestionPanel.this, "Preencha todos os campos",
@@ -128,4 +128,5 @@ public class FormDicursiveQuestionPanel extends FormQuestionPanel {
     Validation validation = new ValidateTextArea();
     return validation.validate(getQuestionTxt());
   }
+
 }

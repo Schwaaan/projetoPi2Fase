@@ -10,4 +10,5 @@ public class ValidateTextArea extends Validation {
     JTextArea jTextArea = (JTextArea) jComponents;
     return !jTextArea.getText().isBlank();
   }
+
 }

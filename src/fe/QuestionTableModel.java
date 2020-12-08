@@ -72,4 +72,5 @@ public class QuestionTableModel extends AbstractTableModel {
     questions.remove(quest);
     fireTableDataChanged();
   }
+
 }
