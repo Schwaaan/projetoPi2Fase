@@ -14,7 +14,7 @@ public class AlternativeService {
     public static List<Alternative> getListAlternativeById(int idQuestion) {
         List<Alternative> alternatives = new ArrayList<Alternative>();
 
-        final String query = "SELECT a.alternative, a.rigth_alternative FROM question q INNER JOIN alternative a ON q.id = a.id_question WHERE q.id = ? ";
+        final String query = "SELECT a.alternative, a.rigth_alternative FROM question q INNER JOIN alternative a ON q.id = a.id_question WHERE q.id = ? AND a.deleted = false";
 
         Connection connection = null;
         PreparedStatement statement = null;

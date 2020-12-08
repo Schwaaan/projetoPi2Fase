@@ -76,7 +76,7 @@ public class QuestionService {
   public static List<Question> getQuestions() {
     List<Question> questions = new ArrayList<>();
 
-    final String query = "SELECT * FROM question ORDER BY id";
+    final String query = "SELECT * FROM question WHERE deleted = false ORDER BY id";
 
     Connection connection = null;
     Statement statement = null;
@@ -130,7 +130,7 @@ public class QuestionService {
   public static boolean updateQuestion(Question question) {
     final String queryUpdate = "UPDATE question SET type_question = ?, question = ?, deleted = ?  where id = ?";
 
-    final String query2 = "DELETE FROM alternative WHERE id_question = ?";
+    final String query2 = "UPDATE alternative SET deleted = true WHERE id_question = ?";
 
     final String query3 = "INSERT INTO alternative(id_question, alternative, rigth_alternative, deleted) VALUES (?, ?, ?, ?)";
 
@@ -181,8 +181,8 @@ public class QuestionService {
   }
 
   public static boolean deleteQuestion(Question question) {
-    final String query1 = "DELETE FROM alternative WHERE id_question = ?";
-    final String query2 = "DELETE FROM question WHERE id = ?";
+    final String query1 = "UPDATE alternative SET deleted = true WHERE id_question = ?";
+    final String query2 = "UPDATE question SET deleted = true WHERE id = ?";
 
     Connection connection = null;
     PreparedStatement statement = null;
