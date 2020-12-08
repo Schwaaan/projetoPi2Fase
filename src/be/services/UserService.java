@@ -33,6 +33,7 @@ public class UserService {
             while (result.next()) {
                 user.setId(result.getInt("id"));
             }
+            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -79,6 +80,9 @@ public class UserService {
             e.printStackTrace();
         } finally {
             try {
+                if (result != null) {
+                    result.close();
+                }
                 if (statement != null) {
                     statement.close();
                 }
