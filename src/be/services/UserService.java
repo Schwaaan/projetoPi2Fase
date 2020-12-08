@@ -14,7 +14,7 @@ import be.repository.ConnectionDataBase;
 public class UserService {
 
     public static boolean insert(User user) {
-        final String INSERT_USER = "INSERT INTO users (name, last_name, type, deleted, password) VALUES (?, ?, ?, ?, ?);";
+        final String INSERT_USER = "INSERT INTO users (name, last_name, type, deleted, password) VALUES (?, ?, ?, ?, ?)";
 
         Connection connection = null;
         PreparedStatement statement = null;
