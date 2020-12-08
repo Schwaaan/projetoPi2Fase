@@ -1,10 +1,11 @@
 package fe;
 
-import be.domain.base.Question;
-import be.domain.base.TypeQuestion;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
+
+import be.domain.base.Question;
 
 public class QuestionTableModel extends AbstractTableModel {
 
