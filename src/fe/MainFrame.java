@@ -1,5 +1,10 @@
 package fe;
 
+import java.awt.CardLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import be.domain.base.Question;
 import fe.panels.DecideTypeQuestionPanel;
 import fe.panels.FormDicursiveQuestionPanel;
@@ -7,17 +12,17 @@ import fe.panels.FormObjectiveQuestionPanel;
 import fe.panels.FormQuestionPanel;
 import fe.panels.HomePanel;
 import fe.panels.QuestionTablePanel;
-import java.awt.CardLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import fe.panels.login.CreateAccountPanel;
+import fe.panels.login.LoginPanel;
 
 public class MainFrame extends JFrame {
 
   public static final String TITLE = "The Game";
   private CardLayout layout;
   private JPanel cardsPanel;
-  private HomePanel homePanel;
+  private LoginPanel homePanel;
   private QuestionTablePanel questionPanel;
+  private CreateAccountPanel createAccountPanel;
 
   private FormQuestionPanel[] formQuestionPanels = new FormQuestionPanel[2];
 
@@ -49,7 +54,7 @@ public class MainFrame extends JFrame {
   }
 
   private void createCards() {
-    this.homePanel = new HomePanel(this);
+    this.homePanel = new LoginPanel(this);
     this.cardsPanel.add(this.homePanel, HomePanel.class.getName());
 
     this.questionPanel = new QuestionTablePanel(this);
@@ -65,6 +70,9 @@ public class MainFrame extends JFrame {
     this.formQuestionPanels[INDEX_DISCURSIVE] = new FormDicursiveQuestionPanel(this);
     this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE],
         formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
+    
+    this.createAccountPanel = new CreateAccountPanel(this);
+    this.cardsPanel.add(this.createAccountPanel, CreateAccountPanel.class.getName());
   }
 
   public void showHomePanel() {
@@ -83,5 +91,9 @@ public class MainFrame extends JFrame {
 
   public void showQuestionDecisivePanel() {
     this.layout.show(this.cardsPanel, DecideTypeQuestionPanel.class.getName());
+  }
+
+  public void showFormCreateAccount() {
+    this.layout.show(this.cardsPanel, CreateAccountPanel.class.getName());
   }
 }
