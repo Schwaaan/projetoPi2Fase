@@ -10,4 +10,5 @@ public class ValidateText extends Validation {
     JTextField jTextField = (JTextField) jComponent;
     return !jTextField.getText().isBlank();
   }
+
 }

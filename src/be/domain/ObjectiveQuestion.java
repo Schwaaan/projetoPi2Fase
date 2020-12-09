@@ -25,4 +25,5 @@ public class ObjectiveQuestion extends Question {
   public void setAlternativeList(List<Alternative> alternativeList) {
     this.alternativeList = alternativeList;
   }
+
 }

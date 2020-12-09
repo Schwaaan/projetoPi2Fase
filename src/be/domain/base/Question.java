@@ -1,9 +1,8 @@
 package be.domain.base;
 
+import be.domain.Alternative;
 import java.util.List;
 import java.util.Locale;
-
-import be.domain.Alternative;
 
 public abstract class Question {
 
@@ -71,7 +70,7 @@ public abstract class Question {
 
   public abstract boolean createQuestion();
 
-public void setAlternativeList(List<Alternative> alternativeList) {}
+  public void setAlternativeList(List<Alternative> alternativeList) {
+  }
 
 }
-

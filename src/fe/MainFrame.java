@@ -1,10 +1,5 @@
 package fe;
 
-import java.awt.CardLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import be.domain.base.Question;
 import fe.panels.DecideTypeQuestionPanel;
 import fe.panels.FormDicursiveQuestionPanel;
@@ -14,6 +9,9 @@ import fe.panels.HomePanel;
 import fe.panels.QuestionTablePanel;
 import fe.panels.login.CreateAccountPanel;
 import fe.panels.login.LoginPanel;
+import java.awt.CardLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
 
@@ -70,7 +68,7 @@ public class MainFrame extends JFrame {
     this.formQuestionPanels[INDEX_DISCURSIVE] = new FormDicursiveQuestionPanel(this);
     this.cardsPanel.add(this.formQuestionPanels[INDEX_DISCURSIVE],
         formQuestionPanels[INDEX_DISCURSIVE].getClass().getName());
-    
+
     this.createAccountPanel = new CreateAccountPanel(this);
     this.cardsPanel.add(this.createAccountPanel, CreateAccountPanel.class.getName());
   }
@@ -96,4 +94,5 @@ public class MainFrame extends JFrame {
   public void showFormCreateAccount() {
     this.layout.show(this.cardsPanel, CreateAccountPanel.class.getName());
   }
+
 }

@@ -49,4 +49,5 @@ public class Alternative {
     return String.format("%s: '%s'\n",
         getClass().getName(), getAlternative());
   }
+
 }

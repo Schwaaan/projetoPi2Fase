@@ -12,6 +12,6 @@ public class TheGame {
         frame.draw();
       }
     });
-
   }
+
 }

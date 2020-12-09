@@ -6,7 +6,6 @@ import be.domain.ObjectiveQuestion;
 import be.domain.base.Question;
 import be.domain.base.TypeQuestion;
 import be.repository.ConnectionDataBase;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -216,4 +215,5 @@ public class QuestionService {
     }
     return true;
   }
+
 }

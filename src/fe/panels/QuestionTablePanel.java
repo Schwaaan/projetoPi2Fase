@@ -44,7 +44,7 @@ public class QuestionTablePanel extends JPanel {
 
   public void reload() {
     List<Question> questionList = QuestionService.getQuestions();
-      tableModel.load(questionList);
+    tableModel.load(questionList);
   }
 
   private void createTable() {
@@ -169,4 +169,5 @@ public class QuestionTablePanel extends JPanel {
     btnChange.setEnabled(true);
     btnRemove.setEnabled(true);
   }
+
 }

@@ -87,4 +87,5 @@ public class DecideTypeQuestionPanel extends JPanel {
     panelbt.add(btnReadQuestions);
     add(panelbt, BorderLayout.CENTER);
   }
+
 }

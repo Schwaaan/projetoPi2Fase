@@ -3,6 +3,11 @@ package fe.panels;
 import be.domain.base.Question;
 import fe.MainFrame;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -10,12 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.GridBagConstraints;
 
 public abstract class FormQuestionPanel extends JPanel {
 
@@ -122,8 +121,5 @@ public abstract class FormQuestionPanel extends JPanel {
   public abstract void setQuestion(Question question);
 
   public abstract Question getQuestion();
+
 }
-
-
-
-    

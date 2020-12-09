@@ -1,64 +1,65 @@
 package be.domain.user;
 
 public class User {
-    private int id;
-    private String name;
-    private String lastName;
-    private String type;
-    private boolean deleted;
-    private String password;
-    
-    public User() {
-        this.type = "ADMIN";
-        this.deleted = false;
-    }
 
-    public int getId() {
-        return id;
-    }
+  private int id;
+  private String name;
+  private String lastName;
+  private String type;
+  private boolean deleted;
+  private String password;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public User() {
+    this.type = "ADMIN";
+    this.deleted = false;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public boolean isDeleted() {
+    return deleted;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setDeleted(boolean deleted) {
+    this.deleted = deleted;
+  }
 
-    public String getType() {
-        return type;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
 
 }
