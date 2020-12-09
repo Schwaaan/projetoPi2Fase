@@ -101,7 +101,7 @@ public class CreateAccountPanel extends JPanel {
 
         boolean insert = UserService.insert(user);
         if (!insert) {
-          JOptionPane.showMessageDialog(CreateAccountPanel.this, "Não foi possivel criar seu"
+          JOptionPane.showMessageDialog(CreateAccountPanel.this, "Não foi possivel criar seu "
                   + "usuário por favor entre em contato com o suporte >:", MainFrame.TITLE,
               JOptionPane.INFORMATION_MESSAGE);
           return;
