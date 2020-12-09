@@ -1,20 +1,11 @@
-Olá Seja Bem vindo ao The Game!
+<h2>Olá Seja Bem vindo ao <b>The Game!</b></h2>
 
-Para rodar o projeto deve ser seguido os seguintes passos:
+<h4>Para rodar o projeto deve ser seguido os seguintes passos:</h4>
   
-  1-Fazer clone do projeto na sua máquina partir do github.
+  <h5>1-Fazer clone do projeto na sua máquina partir do github.</h4>
   
-  2-Criar o banco de dados a partir do dump entregue.
+  <h5>2-Criar o banco de dados a partir do dump entregue.</h5>
   
-  3-Carregar a biblioteca do postgres.
+ <h5> 3-Carregar a biblioteca do postgres.<h4>
   
-  4-Executar o projeto! hehehe :3!
-  
-  <p align="center">
- <a href="#objetivo">Objetivo</a> •
- <a href="#roadmap">Roadmap</a> • 
- <a href="#tecnologias">Tecnologias</a> • 
- <a href="#contribuicao">Contribuição</a> • 
- <a href="#licenc-a">Licença</a> • 
- <a href="#autor">Autor</a>
-</p>
+  <h5>4-Executar o projeto! hehehe :3!</h5>
